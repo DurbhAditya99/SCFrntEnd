@@ -15,7 +15,7 @@ const useStyles = makeStyles({
       maxWidth: 345,
     },
     media: {
-      height: 150,
+      height: 170,
     },
   });
   
@@ -33,13 +33,16 @@ function LandingPage(){
             <h5>Clock in your goodwill hours today!</h5>
             <Button></Button>
             </div>
-
+            <h1>Scroll down</h1>
             <br></br>
+            
+            <Card style={{width:1520,backgroundColor:'orange',fontFamily: 'Fredoke One',textAlign:'center', position: 'absolute',height: 20, top:660}}>Scroll down</Card>
+            
             <div class= 'cards'>
-            <h1 style={{ fontFamily:'Fredoka One',borderRadius: 60,fontSize: 40 ,position:'absolute',top: 720, right: 600}}>Sign Up NOW!!</h1>
+            <h1 style={{ fontFamily:'Cinzel',borderRadius: 60,fontSize: 40 ,position:'absolute',top:680, right: 600}}>Sign Up Now!</h1>
             <div class='card-1'>
             
-          <Card className={classes.root} style={{borderRadius:30}}>
+        <Card className={classes.root} style={{borderRadius:30}}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -47,16 +50,16 @@ function LandingPage(){
           title="Contemplative Reptile"
         />
         <CardContent>
-          <Typography  component="h2" style={{fontSize: 25}}>
+          <Typography  component="h2" style={{fontSize: 26,fontFamily: 'Fredoka One'}}>
             LIFE TIME MEMBERSHIP
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="big" color="primary">
+        <Button size="big" color="primary" style={{backgroundColor:'#0000ad',fontFamily: 'Fredoka One' , color: 'white', borderRadius: 40}}>
           Coming Soon!
         </Button>
-        <Button size="big" color="primary">
+        <Button size="big" color="primary" style={{backgroundColor:'#0000ad',fontFamily: 'Fredoka One' , color: 'white', borderRadius: 40}}>
           Learn More
         </Button>
       </CardActions>
@@ -71,16 +74,16 @@ function LandingPage(){
           title="Contemplative Reptile"
         />
         <CardContent>
-          <Typography  component="h2" style={{fontSize: 25}}>
+          <Typography  component="h2" style={{fontSize: 26, fontFamily: 'Fredoka One'}}>
           SUMMER PROGRAM
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="big" color="primary" href ="/registration">
+        <Button size="big" color="primary" href ="/registration" style={{backgroundColor:'#0000ad',fontFamily: 'Fredoka One' , color: 'white', borderRadius: 40}}>
          Sign Up!        
         </Button>
-        <Button size="big" color="primary">
+        <Button size="big" color="primary" style={{backgroundColor:'#0000ad',fontFamily: 'Fredoka One' , color: 'white', borderRadius: 40}}>
           Learn More
         </Button>
       </CardActions>
@@ -95,7 +98,7 @@ function LandingPage(){
           title="Contemplative Reptile"
         />
         <CardContent>
-          <Typography component="h2" style={{fontSize: 25}}>
+          <Typography component="h2" style={{fontSize: 26,fontFamily: 'Fredoka One'}} >
             DONATE NOW!
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
@@ -104,10 +107,10 @@ function LandingPage(){
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="big" color="primary">
-          Sign Up!
+        <Button size="big" color="primary" style={{backgroundColor:'#0000ad',fontFamily: 'Fredoka One' , color: 'white', borderRadius: 40}} href='/tnc'>
+          PROCEED
         </Button>
-        <Button size="big" color="primary">
+        <Button size="big" color="primary" style={{backgroundColor:'#0000ad',fontFamily: 'Fredoka One' , color: 'white', borderRadius: 40}}>
           Learn More
         </Button>
       </CardActions>

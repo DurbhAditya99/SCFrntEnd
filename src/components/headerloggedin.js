@@ -18,14 +18,14 @@ const useStyles = makeStyles(() => ({
     header: {
       position: 'fixed',
       top: 0,
-      backgroundColor: "#ffffff",
+      backgroundColor: "#ff8800",
      
     },
     logo: {
       fontFamily: "Cinzel",
       fontWeight: 600,
       fontSize: 30,
-      color: "#ff8800",
+      color: "#ffffff",
       textAlign: "left",
       marginTop: 6
     },

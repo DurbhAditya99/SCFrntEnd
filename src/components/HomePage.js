@@ -8,7 +8,8 @@ import Dashboard from './dashboard'
 import CreatePost from './create'
 import ProfileUpdatePage from './profileupdate'
 import ActDetail from './actdetail'
-
+import DonatePage from './donate'
+import TNCPage from './tncs'
 
 
 function HomePage(){
@@ -27,8 +28,10 @@ function HomePage(){
             <Route exact path = '/create' component={CreatePost} />
             <Route path = '/login' component={LoginPage} />
             <Route path = '/registration' component={SignUp} />
+            <Route path='/tnc' component={TNCPage} />
             <Route path = '/actdetail/:id' render={(props) => <ActDetail {...props} /> } />
             <Route path = '/dashboard' component={Dashboard} />
+            <Route path = '/donate' component={DonatePage}></Route>
             </div>
             </Switch>
          </Router>

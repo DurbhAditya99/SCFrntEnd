@@ -7,7 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import EditIcon from '@material-ui/icons/Edit';
-import { TextField } from '@material-ui/core';
+import { TextField, Typography } from '@material-ui/core';
 
 
 const useStyles = makeStyles({
@@ -76,9 +76,9 @@ function  ProfilePage(){
       
        
 
-             <Card variant='outlined' style={{width:1000 , marginTop: 100, marginLeft: 200 }}>
+             <Card variant='outlined' style={{width:1000 , marginTop: 100, marginLeft: 225 }}>
             
-              <h1 style={{fontFamily:'Fredoka One', textAlign:'center'}}>My Profile</h1> 
+              <h1 style={{fontSize:40,fontFamily:'Fredoka One', textAlign:'center'}}>My Profile</h1> 
               
         <CardMedia
           className={classes.media}
@@ -119,6 +119,55 @@ function  ProfilePage(){
               </Grid>
               </Grid>
               </CardContent>
+              </Card>
+              
+              <Card style={{position: 'relative', top : 40, textAlign: 'center',backgroundColor: '#ff8800',borderRadius: 50}}>
+              <Typography style={{fontFamily: "Fredoka One",fontSize: 40}}>My activities</Typography>
+              <CardContent>
+              <Grid container spacing={3} >
+                <Grid item xs = {4}>
+                 <Typography >Title </Typography> 
+                </Grid>
+                <Grid item xs = {4}>
+                 <Typography>Start Date </Typography> 
+                </Grid>
+                <Grid item xs = {4}>
+                 <Typography>Status </Typography> 
+                </Grid>
+              </Grid>
+              {acts.map((info)=>{
+
+                  return(
+                    
+                      <Grid container spacing={2}>                      
+                      <Grid item xs ={4}>
+                      <Card>
+                      <CardContent>
+                    {info.title}
+                    </CardContent>
+                    </Card>
+                    </Grid>
+                    <Grid item xs ={4}>
+                      <Card>
+                      <CardContent>
+                    {info.start_date}
+                    </CardContent>
+                    </Card>
+                    </Grid>
+                    <Grid item xs ={4}>
+                      <Card style={{height:60 }}>
+                      <CardContent>
+                    {info.act_status ? <p>Active</p> : <p>InActive</p> }
+                    </CardContent>
+                    </Card>
+                    </Grid>
+                    </Grid>
+                    
+                  )
+              
+
+              })}
+             </CardContent>
               </Card>
 
             
