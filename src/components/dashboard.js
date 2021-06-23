@@ -8,8 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
 
-
-
 const token = localStorage.getItem('token')
 const fn = localStorage.getItem('first_name')
 

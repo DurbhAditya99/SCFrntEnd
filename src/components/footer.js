@@ -37,66 +37,26 @@ function Footer(){
       
     const { header, logo, menuButton } = useStyles();
 
-    
-
-
-    const displayDesktop = () => {
-        return (
-            <Toolbar>
-            <Grid
-              justify="space-between" 
-              container 
-              spacing={24}
-              >
-          <Grid item xs={8}>
-            <Typography type="title" color="inherit">
-            {GOTLogo}
-            </Typography>
-            </Grid>
-            
-          <Grid item xs={1}>
-            <Button className={menuButton} style={{borderRadius: 20}}  href='/' >Home </Button>
-            </Grid>
-            <Grid item xs={1}>
-            <Button className={menuButton} style={{borderRadius: 20}} href='/login' >Login </Button>
-            </Grid>
-            <Grid item xs={1}>
-            <Button className={menuButton} style={{borderRadius: 20}} href='/registration'>Register</Button>
-            </Grid>
-            <Grid item xs={1}>
-            <Button className={menuButton} style={{borderRadius: 20}}>About</Button>
-            </Grid>
-            </Grid>
-            </Toolbar> ); 
-      };
-
-      
-  const GOTLogo = (
-    <Typography variant="h6" component="h1" className={logo} >
-       
-             Gift of Time
-    
-    </Typography>
-  );
+  
 
 
     return(
-    
- 
 
-<div class="footer" style={{ 
-  position: 'relative',
-  left: 0,
-  bottom: 0,
-  width: 1500 ,
-  height: 30,
-  backgroundColor: 'whitesmoke',
-  color: '#ff8800',
-  textAlign: 'center',
-  fontSize: 20
-   }}>
-  <p>TERMS AND CONDITIONS</p>
-</div>
+    <AppBar style={{
+      position: 'relative',
+      left: 0,
+      bottom: 0,
+      height:90,
+      width: 1580,
+      marginBottom: 0,
+      backgroundColor: 'white',textAlign:'center',
+   
+    }}> 
+  
+  <a href='https://documentcloud.adobe.com/link/review?uri=urn:aaid:scds:US:e310af10-87c5-4d86-86c4-b09fafc0e835'>Terms and conditions</a>
+  <a href='https://documentcloud.adobe.com/link/review?uri=urn:aaid:scds:US:530bde28-0762-47db-b1ea-854a9b24eff3'>Privacy Policy</a>
+
+  </AppBar>
     
     )
 

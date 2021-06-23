@@ -39,8 +39,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-
-
 // Registration Part
 
 export default function SignUp() {
