@@ -37,6 +37,9 @@ export default function TNCPage(){
             <a href='https://documentcloud.adobe.com/link/review?uri=urn:aaid:scds:US:26812c15-bde2-44a2-a2dc-0b5896cb7d73'>Fees and Refund Policy</a>
             </Grid>
             <Grid item xs ={12}>
+            <a href='https://documentcloud.adobe.com/link/review?uri=urn:aaid:scds:US:530bde28-0762-47db-b1ea-854a9b24eff3'>Privacy Policy</a>
+            </Grid>
+            <Grid item xs ={12}>
             <FormControlLabel
         control={
           <Checkbox
@@ -46,11 +49,11 @@ export default function TNCPage(){
             color="primary"
           />
         }
-        label="I read the terms and conditions and agree to proceed with the donation process"
+        label="By clicking proceed, you agree to our terms of use, fees and refund policy and that you have read and accept the privacy policy"
       />
             </Grid>
             <Grid item xs={12}>
-              {val ?  <Button style={{backgroundColor: '#0000ad', color: 'white'}} href='/donate'>Continue</Button> : ''}
+              {val ?  <Button style={{backgroundColor: '#ff033e', color: 'white'}} href='/donate'>Continue</Button> : ''}
              
             </Grid>
         </Grid>

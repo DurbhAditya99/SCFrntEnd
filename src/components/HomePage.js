@@ -10,7 +10,8 @@ import ProfileUpdatePage from './profileupdate'
 import ActDetail from './actdetail'
 import DonatePage from './donate'
 import TNCPage from './tncs'
-
+import AccountInfo from './info'
+import DonateSignPage from './donatesignup'
 
 function HomePage(){
 
@@ -19,19 +20,23 @@ function HomePage(){
        
         <Router>
         <Switch>
+        
             <Route exact path = '/' component={LandingPage} />
+      
             <div style={{
-            marginTop: 80, marginBottom: 80
+            marginTop: 80
         }}>
             <Route exact path = '/profile' component={ProfilePage} />
             <Route path = '/profile/edit' component={ProfileUpdatePage} />
             <Route exact path = '/create' component={CreatePost} />
             <Route path = '/login' component={LoginPage} />
-            <Route path = '/registration' component={SignUp} />
+            <Route path = '/signup' component={SignUp} />
             <Route path='/tnc' component={TNCPage} />
             <Route path = '/actdetail/:id' render={(props) => <ActDetail {...props} /> } />
             <Route path = '/dashboard' component={Dashboard} />
             <Route path = '/donate' component={DonatePage}></Route>
+            <Route path = '/signup/donate' component={DonateSignPage}></Route>
+            <Route path = '/info' component = {AccountInfo}></Route>
             </div>
             </Switch>
          </Router>

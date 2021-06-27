@@ -14,13 +14,13 @@ const tokenglobal = localStorage.getItem('token')
 
 const useStyles = makeStyles(() => ({
     header: {
-      backgroundColor: "#ff8800",
+      backgroundColor: "#ffffff",
     },
     logo: {
       fontFamily: "Cinzel",
       fontWeight: 600,
       fontSize: 35,
-      color: "#ffffff",
+      color: "#ff033e",
       textAlign: "left",
     },
     menuButton: {
@@ -28,6 +28,7 @@ const useStyles = makeStyles(() => ({
         fontWeight: 800,
         fontSize: 15,
         marginTop: 12,
+        color: '#ff033e'
         
      },
   }));
@@ -61,7 +62,7 @@ function Navbar(){
             <Button className={menuButton} style={{borderRadius: 20}}>About</Button>
             </Grid>
             <Grid item xs={1}>
-            <Button className={menuButton} style={{borderRadius: 20}} href='/registration'>Sign Up</Button>
+            <Button className={menuButton} style={{borderRadius: 20}} href='/signup'>Sign Up</Button>
             </Grid>
             <Grid item xs={1}>
             <Button className={menuButton} style={{borderRadius: 20}} href='/login' >Login </Button>

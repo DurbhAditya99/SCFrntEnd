@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react'
 import {useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import { Card } from '@material-ui/core';
 import { CardContent } from '@material-ui/core';
 import { CardMedia } from '@material-ui/core';
 import { CardActionArea } from '@material-ui/core';
 import { Button } from '@material-ui/core';
+import { updateUser } from './redux/ActionCreator'
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchUser } from './redux/ActionCreator';
 
 
 
@@ -53,24 +52,14 @@ export default function  ProfileUpdatePage(){
 	});
 
   const [formData, updateFormData] = useState(initialFormData);
-  const [user,setUser] = useState({})
+  const dispatch = useDispatch()
+  const [users,setUser] = useState({})
+  const user = useSelector((state) => state.users.users)
 
 
   useEffect(() =>{
 	//   const userID =this.props.match.params.userID;
-	   fetch(`http://127.0.0.1:8000/api/user/profile/${userID}`,{
-		 method: 'GET',
-		 headers: {
-		   "Content-Type": 'application/json',
-		   "Authorization" : `Token ${token}`								
-		 }
-	   })
-		 .then(res => res.json())
-		 .then(data => {
-		   console.log(data)
-		   setUser(data)
-			 console.log(user) 
-		 } )
+	dispatch(fetchUser(token,userID))
 	   }, [])
 	   
    
@@ -78,24 +67,17 @@ export default function  ProfileUpdatePage(){
  
   const handleSubmit =() =>{
     console.log(formData)
+
+	const body = {
+		first_name : formData.first_name ? formData.first_name : user['first_name'],
+		last_name: formData.last_name ? formData.last_name : user['last_name'],	
+		mobile_number: formData.mobile_number ? formData.mobile_number : user['mobile_number'],
+		about: formData.about ? formData.about : user['about']
+	}
+
+	dispatch(updateUser(token,userID,body))
 	
-    fetch(`http://127.0.0.1:8000/api/user/update/${userID}`,{
-      method: 'PUT',
-      headers: {
-        "Content-Type": 'application/json',
-        "Authorization" : `Token ${token}`								
-      },
-      body: JSON.stringify({
-				first_name : formData.first_name ? formData.first_name : user['first_name'],
-				last_name: formData.last_name ? formData.last_name : user['last_name'],	
-				mobile_number: formData.mobile_number ? formData.mobile_number : user['mobile_number'],
-                about: formData.about ? formData.about : user['about']
-			}),
-      })
-      .then(res => res.json())
-      .then((data) => {
-        console.log(data)
-    })
+	window.location.href = '/profile'
   }
 
   	const handleChange = (e) => {
@@ -146,7 +128,7 @@ export default function  ProfileUpdatePage(){
 	   <TextField label='Credit Balance: ' value={user['account_balance']} defaultValue='nONE' variant='outlined' > </TextField>
 		</Grid>
 		<Grid item xs={12}>
-		<TextField label='About Me:' multiline placeholder='Write a bit about yourself' name ='about' variant='outlined' style={{width: 600 }}  onChange={handleChange}> </TextField>
+		<TextField label='About Me:' name='about' multiline placeholder={user['about']} variant='outlined' style={{width: 600 }}  onChange={handleChange}> </TextField>
 		</Grid>
 		
 		<Grid item xs={12}>

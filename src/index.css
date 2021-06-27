@@ -67,7 +67,7 @@ code {
     width: 100%;
     height: 100%;
     overflow-y: scroll;
-   
+    background-image: url(./images/pnk.jpg);
 
 }
 
@@ -92,7 +92,7 @@ code {
     position: absolute;
     text-align: left;
     font-size: 1000%;
-    color: #ff8800;
+    color: #FFFFFF;
     font-family:Luckiest Guy;
     margin-top: 1ch;
     border-radius: 25%;
@@ -100,16 +100,16 @@ code {
     -webkit-text-stroke: 0.0005px black ;
    
 }
+
 .land .title h5{
-    position: absolute;
-    color: #ff8800;
+    position: relative;
+    color: #FF033E;
     font-size: 200%;
     top: 80px; 
-    left: 820px;
+    left: 230px;
     margin-top: 20ch;
     font-family: Pangolin ;
     border-radius: 10%;
-
 }
 
 .land .image {
@@ -131,16 +131,16 @@ code {
 }
 
 .land .card-2 h2{
-    color: #ff8800;
+    color: #FF033E;
     font-family: 'Times New Roman', Times, serif;
  }
 .land .card-1 h2{
     font-family: 'Times New Roman', Times, serif;
-    color: #ff8800;
+    color: #FF033E;
  }
 .land .card-3 h2{
     font-family: 'Times New Roman', Times, serif;
-   color: #ff8800;
+    color: #FF033E;
 }
 
 .land .card-2{
@@ -234,8 +234,7 @@ html,body{
     border-color: black;
     border-width: 10ch;
     
-    background-image:  url('./images/bg8.jpg');
-    background-color: orange;
+    background-color: white;
     outline-style: groove;
     outline-color: rgb(7, 4, 0);
 }

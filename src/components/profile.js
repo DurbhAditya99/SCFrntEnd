@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import EditIcon from '@material-ui/icons/Edit';
 import { TextField, Typography } from '@material-ui/core';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchUser } from './redux/ActionCreator';
 
 
 const useStyles = makeStyles({
@@ -19,34 +21,19 @@ const useStyles = makeStyles({
   },
 });
 
-
-
-
 const token = localStorage.getItem('token')
 const userID = localStorage.getItem('userID')
 
-function  ProfilePage(){
-    
-  const [user,setUser] = useState({})
+function ProfilePage(){
+  
+  const user = useSelector((state) => state.users.users)
   const [acts,setAct] = useState([])
+  const dispatch = useDispatch()
   const classes = useStyles();
 
     useEffect(() =>{
- //   const userID =this.props.match.params.userID;
-    fetch(`http://127.0.0.1:8000/api/user/profile/${userID}`,{
-      method: 'GET',
-      headers: {
-        "Content-Type": 'application/json',
-        "Authorization" : `Token ${token}`								
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data)
-        setUser(data)
-        
-      } )
-
+      dispatch(fetchUser(token,userID))
+      
       fetch(`http://127.0.0.1:8000/api/user/act`,{
         method: 'GET',
         headers: {
@@ -112,6 +99,10 @@ function  ProfilePage(){
              </Grid>
              <Grid item xs={3}>
              <TextField label='Credit Balance: ' defaultValue='nONE' variant='outlined' value={user['account_balance']} id='read-only'> </TextField>
+            
+              </Grid>
+              <Grid item xs={3}>
+             <TextField label='User ID: ' defaultValue='nONE' variant='outlined' value={user['id']} id='read-only'> </TextField>
             
               </Grid>
               <Grid item xs={12}>

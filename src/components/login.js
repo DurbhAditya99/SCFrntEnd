@@ -17,17 +17,22 @@ import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
-		marginTop: theme.spacing(8),
+		marginTop: theme.spacing(15),
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
+		backgroundColor: '#ffffff',
+		borderRadius: 20,
+		width:500
 	},
 	avatar: {
 		margin: theme.spacing(1),
-		backgroundColor: theme.palette.primary.main,
+		backgroundColor: '#ffffff',
 		height:theme.spacing(12),
 		width: theme.spacing(12),
-		marginTop: theme.spacing(4)
+		marginTop: theme.spacing(4),
+		color: '#ffdddd'
+	
 	},
 	large: {
 		width: theme.spacing(7),
@@ -39,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	submit: {
 		margin: theme.spacing (3, 0, 2),
+		backgroundColor: '#FF033E'
 	},
 }));
 
@@ -115,7 +121,7 @@ function LoginPage(){
 			<CssBaseline />
 			<div className={classes.paper}>
 				<Avatar className={classes.avatar}></Avatar>
-				<Typography component="h1" variant="h5">
+				<Typography component="h1" variant="h5" style={{color: '#ff033e'}}>
 					 Sign In
 				</Typography>
 				{errors.length >0 ?<Alert severity='error'> {errors}</Alert>  : null }

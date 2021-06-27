@@ -42,10 +42,10 @@ function Footer(){
       position: 'relative',
       left: 0,
       bottom: 0,
-      height:90,
+      height:180,
       width: 1530,
       marginBottom: 0,
-      backgroundColor: '#ff8800',textAlign:'center',
+      backgroundColor: '#ff033e',textAlign:'center',
       color:'white',
       marginTop: 10,display: 'inline-flex'
       

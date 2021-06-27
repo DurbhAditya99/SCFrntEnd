@@ -36,10 +36,10 @@ function LandingPage(){
             <h1>Scroll down</h1>
             <br></br>
             
-            <Card style={{width:1520,backgroundColor:'orange',fontFamily: 'Fredoke One',textAlign:'center', position: 'absolute',height: 20, top:660}}>Scroll down</Card>
+            <Card style={{width:1520,backgroundColor:'#FFFFFF',fontFamily: 'Fredoke One',textAlign:'center', position: 'absolute',height: 20, top:660}}>Scroll down</Card>
             
             <div class= 'cards'>
-            <h1 style={{ fontFamily:'Cinzel',borderRadius: 60,fontSize: 40 ,position:'absolute',top:680, right: 600}}>Sign Up Now!</h1>
+            <h1 style={{ fontFamily:'Cinzel',color: '#ff033e',borderRadius: 60,fontSize: 40 ,position:'absolute',top:680, right: 600}}>Sign Up Now!</h1>
             <div class='card-1'>
             
         <Card className={classes.root} style={{borderRadius:30}}>
@@ -56,10 +56,10 @@ function LandingPage(){
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="big" color="primary" style={{backgroundColor:'#0000ad',fontFamily: 'Fredoka One' , color: 'white', borderRadius: 40}}>
+        <Button size="big" color="primary" style={{backgroundColor:'#ffdddd',fontFamily: 'Fredoka One' , color: '#FF033E', borderRadius: 40}}>
           Coming Soon!
         </Button>
-        <Button size="big" color="primary" style={{backgroundColor:'#0000ad',fontFamily: 'Fredoka One' , color: 'white', borderRadius: 40}}>
+        <Button size="big" color="primary" style={{backgroundColor:'#ffdddd',fontFamily: 'Fredoka One' , color: '#FF033E', borderRadius: 40}}>
           Learn More
         </Button>
       </CardActions>
@@ -80,10 +80,10 @@ function LandingPage(){
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="big" color="primary" href ="/registration" style={{backgroundColor:'#0000ad',fontFamily: 'Fredoka One' , color: 'white', borderRadius: 40}}>
+        <Button size="big" color="primary" href ="/signup" style={{backgroundColor:'#ffdddd',fontFamily: 'Fredoka One' , color: '#FF033E', borderRadius: 40}}>
          Sign Up!        
         </Button>
-        <Button size="big" color="primary" style={{backgroundColor:'#0000ad',fontFamily: 'Fredoka One' , color: 'white', borderRadius: 40}}>
+        <Button size="big" color="primary" style={{backgroundColor:'#ffdddd',fontFamily: 'Fredoka One' , color: '#FF033E', borderRadius: 40}}>
           Learn More
         </Button>
       </CardActions>
@@ -107,10 +107,10 @@ function LandingPage(){
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="big" color="primary" style={{backgroundColor:'#0000ad',fontFamily: 'Fredoka One' , color: 'white', borderRadius: 40}} href='/tnc'>
+        <Button size="big" color="primary" style={{backgroundColor:'#ffdddd',fontFamily: 'Fredoka One' , color: '#FF033E', borderRadius: 40}} href='/tnc'>
           PROCEED
         </Button>
-        <Button size="big" color="primary" style={{backgroundColor:'#0000ad',fontFamily: 'Fredoka One' , color: 'white', borderRadius: 40}}>
+        <Button size="big" color="primary" style={{backgroundColor:'#ffdddd',fontFamily: 'Fredoka One' , color: '#FF033E', borderRadius: 40}}>
           Learn More
         </Button>
       </CardActions>

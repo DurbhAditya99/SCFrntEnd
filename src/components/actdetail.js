@@ -150,9 +150,29 @@ function ActDetail(props){
             <TextField
             name='current'
             defaultValue = 'None'
-            value = {act['user']}
+            value = {act['user'] ? act['user'].length : 1}
             variant= 'outlined'
             label='Current number of volunteers'          
+            >
+            </TextField>
+            </Grid>
+            <Grid item xs={3}>
+            <TextField
+            name='founder'
+            defaultValue = 'None'
+            value = {act['founder']}
+            variant= 'outlined'
+            label='Founder'          
+            >
+            </TextField>
+            </Grid>
+            <Grid item xs={3}>
+            <TextField
+            name='members'
+            defaultValue = 'None'
+            value = {act['members']}
+            variant= 'outlined'
+            label='Members'          
             >
             </TextField>
             </Grid>

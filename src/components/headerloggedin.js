@@ -18,14 +18,14 @@ const useStyles = makeStyles(() => ({
     header: {
       position: 'fixed',
       top: 0,
-      backgroundColor: "#ff8800",
+      backgroundColor: "#ffffff",
      
     },
     logo: {
       fontFamily: "Cinzel",
       fontWeight: 600,
       fontSize: 30,
-      color: "#ffffff",
+      color: "#ff033e",
       textAlign: "left",
       marginTop: 6
     },
@@ -36,7 +36,8 @@ const useStyles = makeStyles(() => ({
         marginLeft: "40px",
         textAlign: 'right',
         marginTop: 18,
-        borderRadius: 20
+        borderRadius: 20,
+        color: '#ff033e'
      },
      toolbar: {
         display: "flex",

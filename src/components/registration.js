@@ -18,7 +18,7 @@ import Switch from '@material-ui/core/Switch';
 
 
 const useStyles = makeStyles((theme) => ({
-	paper: {
+	paper: {	
 		marginTop: theme.spacing(8),
 		display: 'flex',
 		flexDirection: 'column',
@@ -70,6 +70,7 @@ export default function SignUp() {
 	const [formData, updateFormData] = useState(initialFormData);
 	const [formErrors, updateFormErrors] = useState(iformErrors);
 	const [errors,setErrors] = useState('')
+	const [disp,setDisp] = useState(false)
 
 	const formValid = (formError) => {
 		let valid = true;
@@ -124,12 +125,14 @@ export default function SignUp() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		setErrors('')
 		
 		if (formValid(formErrors)){
 			console.log('valid!')
 			
 			if(formData.dob===''){
 				console.log('wrong dob')
+				return
 			}
 
 		
@@ -152,33 +155,27 @@ export default function SignUp() {
 
 		})
 		.then(function(res){ 
+			
 			if (res.status !== 200) {
 				console.log('Looks like there was a problem. Status Code: ' + res.status);
 				return;
 			  }
-
+			 
 			res.json().then(function(data) {	
 				console.log('printing data',data)
-				const token = data['token']
-				const id = data['id']
-				if (token) {
-				localStorage.setItem('token' , token)
-				localStorage.setItem('userID', id)
-				window.location.href = '/dashboard';
-				} else {
 					
 					if(data['dob']){
 						const db = data['dob']
 						console.log(db[0])
 						setErrors('Please enter date of birth')
+						return
 					}
 					if(data['email_id']){
 					const em = data['email_id']
 					setErrors(em[0])
-
+						return
 					} 
-				}
-		})
+				})
 	})
 		.catch(error => {
             console.log('There was an error!', error);
@@ -186,7 +183,9 @@ export default function SignUp() {
 	}else {
 		console.log('invalid!')
 		setErrors('Form Invalid!')
+		return
 	}
+		
 	}
 	
 	
@@ -204,7 +203,7 @@ export default function SignUp() {
 			
 			<div className={classes.paper}>
 				<Avatar className={classes.avatar}></Avatar>
-				<Typography component="h1" variant="h5">
+				<Typography component="h1" variant="h5" style={{color:'#ff033e'}}>
 					 Summer Program Sign up!	 
 				</Typography>
 					{errors.length >0 ?<Alert severity='error'> {errors}</Alert>  : null }
@@ -348,12 +347,19 @@ export default function SignUp() {
 					>
 						Sign Up
 					</Button>
-					
+					{disp ? <h4>Please check your email to activate your account</h4> : ''}
 					<Grid container justify="flex-end">
 						<Grid item>
 							<Link href="/login" variant="body2">
 								Already have an account? Sign in
 							</Link>
+						</Grid>
+						<Grid item>
+							<h2 style={{color: '#ff033e',  fontFamily: 'Cinzel'}}>
+						Love Gift of Time ? With your donation of Rs. 999 your social cred$ account is now evergreen for life -you get tax benefits, and it helps us run our programs better and reach more people. Together, lets make this a new social spring revolution
+						</h2>
+						<Button href= '/donate' style={{backgroundColor: '#ff033e', color: '#ffffff'}}>Donate now!
+						</Button>
 						</Grid>
 					</Grid>
 				</form>

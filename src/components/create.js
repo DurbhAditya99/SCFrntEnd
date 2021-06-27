@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
 
 const token = localStorage.getItem('token')
 const userID = localStorage.getItem('userID')
-
+const fn = localStorage.getItem('first_name')
 // Registration Part
 
 export default function CreatePost() {
@@ -140,6 +140,7 @@ export default function CreatePost() {
                 est_hours : formData.est_hours,
                 vol_req : formData.vol_req,
 				is_active : formData.checkedA,
+				founder: fn,
 			}),
 
 		})
@@ -173,7 +174,7 @@ export default function CreatePost() {
 			
 			<div className={classes.paper}>
 
-				<Typography component="h1">
+				<Typography component="h1" style={{color:'#ff033e'}}>
                     Register your program! 
 				</Typography>
 
