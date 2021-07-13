@@ -6,34 +6,53 @@ import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Alert from '@material-ui/lab/Alert';
-import Switch from '@material-ui/core/Switch';
+import { registerUser } from './redux/ActionCreator';
+import { useDispatch } from 'react-redux';
+import {toast} from 'react-toastify';
+import Checkbox from '@material-ui/core/Checkbox';
+import 'react-toastify/dist/ReactToastify.css';
+import { MenuItem } from '@material-ui/core';
+import months from './resources/months'
+import dates from './resources/dates'
+import years from './resources/years'
+
+toast.configure()
 
 
 
 const useStyles = makeStyles((theme) => ({
-	paper: {	
-		marginTop: theme.spacing(8),
+	avatar: {
+		margin: theme.spacing(1),
+		height: 50,
+		backgroundColor: '#ff8800',	
+		width: 50,
+		float: 'center',
+		alignItems: 'center',
+		textAlign: 'center'
+	},
+	paper: {
+		marginTop: theme.spacing(15),
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-	},
-	avatar: {
-		margin: theme.spacing(1),
-		backgroundColor: theme.palette.primary.main,
-	},
-	form: {
-		width: '170%', // Fix IE 11 issue.
-		marginTop: theme.spacing(3),
+		backgroundColor: '#ffffff',
+		borderRadius: 20,
+		zIndex: 5,
+		
 	},
 	submit: {
 		margin: theme.spacing (3, 0, 2),
+	},
+	form: {
+		width: '100%', // Fix IE 11 issue.
+		marginTop: theme.spacing(3),
+		float: 'center'
 	},
 }));
 
@@ -42,9 +61,11 @@ const useStyles = makeStyles((theme) => ({
 // Registration Part
 
 export default function SignUp() {
-
+	
+	const dispatch = useDispatch();
 	const [state, setState] = React.useState({
-		checkedA: true
+		checkedA: true,
+		checkedB: false,
 	  });
 
 	const history = useHistory();
@@ -55,7 +76,10 @@ export default function SignUp() {
     	dob: " ",
     	first_name: '',
    	 	last_name: '',
-   		mobile_number: ''
+   		mobile_number: '',
+		dob_d : '',
+		dob_m : '',
+		dob_y : '',
 	});
 
 	const iformErrors = {
@@ -102,9 +126,6 @@ export default function SignUp() {
 			case 'last_name':
 				formErr.last_name = (value.length <3 && value.length >0) ? "Please enter your last name" : "";
 				break;
-			case 'dob':
-				formErr.dob = (value.length == 0) ? "Please enter your Date of birth" : "";
-				break;
 			case 'password':
 				formErr.password= (value.length<6 && value.length > 0) ? "Minimum 6 characters" : "";
 				break;
@@ -125,8 +146,11 @@ export default function SignUp() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setErrors('')
+		setErrors('')	
 		
+
+		console.log(formData.dob_d + '-' + formData.dob_m + '-' + formData.dob_y)
+
 		if (formValid(formErrors)){
 			console.log('valid!')
 			
@@ -135,57 +159,25 @@ export default function SignUp() {
 				return
 			}
 
+		const body = {
+			first_name : formData.first_name,
+			last_name: formData.last_name,	
+			dob: formData.dob_y + '-' + formData.dob_m + '-' + formData.dob_d,
+			mobile_number: formData.mobile_number,
+			email_id: formData.email_id,	
+			password: formData.password,
+			above_age: state.checkedA,
+		}
 		
-
-
-		fetch('http://127.0.0.1:8000/api/user/register/',{
-			method:"POST",
-			headers: {
-				"Content-Type": 'application/json',								
-			},
-			body: JSON.stringify({
-				first_name : formData.first_name,
-				last_name: formData.last_name,	
-				dob: formData.dob,
-				mobile_number: formData.mobile_number,
-				email_id: formData.email_id,	
-				password: formData.password,
-				above_age: state.checkedA,
-			}),
-
-		})
-		.then(function(res){ 
-			
-			if (res.status !== 200) {
-				console.log('Looks like there was a problem. Status Code: ' + res.status);
-				return;
-			  }
-			 
-			res.json().then(function(data) {	
-				console.log('printing data',data)
-					
-					if(data['dob']){
-						const db = data['dob']
-						console.log(db[0])
-						setErrors('Please enter date of birth')
-						return
-					}
-					if(data['email_id']){
-					const em = data['email_id']
-					setErrors(em[0])
-						return
-					} 
-				})
-	})
-		.catch(error => {
-            console.log('There was an error!', error);
-        });
+		
+		dispatch(registerUser(body))
+		
+	
 	}else {
 		console.log('invalid!')
-		setErrors('Form Invalid!')
+		setErrors('Please check whether information entered is correct.')
 		return
 	}
-		
 	}
 	
 	
@@ -194,89 +186,127 @@ export default function SignUp() {
 
 	return(
 
-		<div class = 'register'>
+		<div style={{zIndex:5}}>
 		
-		
-		<Container component="main" maxWidth="xs">
-		
+		<Container component="main" maxWidth='md'>
 			<CssBaseline />
-			
 			<div className={classes.paper}>
-				<Avatar className={classes.avatar}></Avatar>
-				<Typography component="h1" variant="h5" style={{color:'#ff033e'}}>
-					 Summer Program Sign up!	 
-				</Typography>
-					{errors.length >0 ?<Alert severity='error'> {errors}</Alert>  : null }
-				<form className={classes.form} noValidate>
-					<Grid container spacing={2} >
-					<Grid item xs={12}>
-					<FormControlLabel
-					control ={
-					<Switch
-      				checked={state.checkedA}
-       				onChange={handleChange}
-       				 name="checkedA"
-       				 inputProps={{ 'aria-label': 'secondary checkbox' }}
-					color ='primary'
-     				 />
-					}
-					label ="Are you above 18?(if below 18 please provide parents' email id and mobile number)"
-					/>
-						</Grid>	
-					<Grid item xs={12}>
+			<Avatar className={classes.avatar}></Avatar>
+
+			<form className={classes.form} noValidate>
+					<Grid container spacing={1} >
+					<Grid item md={3}></Grid>
+					<Grid item xs={12} md={3} style={{textAlign: 'center'}}>
+					
 							<TextField
 								variant="outlined"
-								required
-								fullWidth
+								required	
 								name="first_name"
 								label= "First Name"
 								type="FirstName"
 								id="first_name"
 								onChange={handleChange}
 							/>
-							{formErrors.first_name.length>0 && (
-								<span className="errorMessage">{formErrors.first_name}</span>
-							)}
+
 						</Grid>
-						<Grid item xs={12}> 
+						<Grid item xs={12} md={3} style={{textAlign: 'center'}}> 
 							<TextField
 								variant="outlined"
 								required
-								fullWidth
 								name="last_name"
 								label= "Last Name"
 								type="LastName"
 								id="LastName"
 								onChange={handleChange}
 							/>
-							{formErrors.last_name.length>0 && (
-								<span className="errorMessage">{formErrors.last_name}</span>
-							)}
+							
 						</Grid>
-						
-						<Grid item xs={12}>
+						<Grid item md={3}></Grid>
+						<Grid item xs={1} md={3}></Grid>
+						<Grid item xs={3} md={2} style={{textAlign: 'center'}}>
            				 <TextField
-            			id="dob"
-           				 name='dob'
-            			label="Date of Birth"
-            			type="date"
+            			id="dob_d"
+           				name='dob_d'
+            			label="Date of birth"
+            			select
+						size = 'small'
+						placeholder = 'Enter date'
+						variant = 'outlined'
+						style={{width:90, height: 40  ,marginTop:12}}
+          				onChange={handleChange}
+         			 	className={classes.textField}
+           				InputLabelProps={{
+            			 shrink: true,
+         					 }}
+              				>
+								   {dates.map((option)=> (	
+								<MenuItem key={option.value} value={option.value}>
+									{option.label}
+								</MenuItem>
+
+							  ))}
+							  </TextField>
+						</Grid>
+						<Grid item xs={3} md={2} style={{textAlign: 'center'}}>
+           				 <TextField
+            			id="dob_m"
+           				name='dob_m'
+            			label="Month of birth"
+            			select	
+						size = 'small'
+						variant = 'outlined'
+						style={{width:90, height: 40  ,marginTop: 12}}
+          				onChange={handleChange}
+         			 	className={classes.textField}
+           				InputLabelProps={{
+            			 shrink: true,
+         					 }}
+         
+              				>
+							  {months.map((option)=> (
+								<MenuItem key={option.value} value={option.value}>
+									{option.label}
+								</MenuItem>
+
+							  ))}
+							</TextField>  
+						</Grid>
+						<Grid item xs={3} md={2} style={{textAlign: 'center'}}>
+           				 <TextField
+            			id="dob_y"
+           				name="dob_y"
+            			label="Year of Birth"
+            			select
+						size = 'small'
+						variant = 'outlined'
+						style={{width:90, height: 40  ,marginTop: 12}}
           				 onChange={handleChange}
          			 	 className={classes.textField}
            				InputLabelProps={{
             			 shrink: true,
          					 }}
          
-              				/>
-							  {formErrors.dob.length>0 && (
-								<span className="errorMessage">{formErrors.dob}</span>
-							)}
-							  
+              				>
+							  {years.map((option)=> (
+								<MenuItem key={option.value} value={option.value}>
+									{option.label}
+								</MenuItem>
+
+							  ))}
+								</TextField>
 						</Grid>
-						<Grid item xs={12}>
+						<Grid item xs={1} md={3}></Grid>
+						<Grid item xs={1} md={3}></Grid>	
+						<Grid item xs={10} md={6}>
+					    <Typography style={{marginTop:8,marginBottom:8, fontFamily:'Raleway'}}>Are you above 18?(if below 18 please provide parents' email id and mobile number)</Typography>	
+						</Grid>	
+						<Grid item xs={1} md={3}></Grid>	
+						<Grid item md={3}></Grid>
+						<Grid item xs={12} md={3} style={{textAlign: 'center'}}>
 							<TextField
 								variant="outlined"
-								required
-								fullWidth
+								required	
+								
 								id="email_id"
 								label="Email Address"
 								name="email_id"
@@ -284,13 +314,33 @@ export default function SignUp() {
 								onChange={handleChange}
 							/>
 						</Grid>
-						<Grid item xs={12}>
+						    
+						<Grid item xs={12} md={3}  style={{textAlign: 'center'}}> 
 							<TextField
 								variant="outlined"
 								required
-								fullWidth
+								
+								name="mobile_number"
+								label= "Mobile Number(+91): "
+								type="number"
+								id="MobileNo"
+								onChange={handleChange}
+							/>
+								{formErrors.mobile_number.length>0 && (
+								<Grid item xs={12} style={{textAlign: 'center', marginTop: 16}}><span className=" ">{formErrors.mobile_number}</span></Grid>	
+							)}
+							
+							</Grid>
+						
+							<Grid item md={3}></Grid>			
+							<Grid item md={3}></Grid>
+						<Grid item xs={12} md={3} style={{textAlign: 'center'}}> 
+							<TextField
+								variant="outlined"
+								required
+								style={{height: 40 ,marginTop: 16}}
 								name="password"
-								label="Password(6 characters minimum)"
+								label="Password"
 								type="password"
 								id="password"
 								minLength = "6"
@@ -298,14 +348,14 @@ export default function SignUp() {
 								onChange={handleChange}
 							/>
 							{formErrors.password.length>0 && (
-								<span className="errorMessage">{formErrors.password}</span>
+								<Grid item style={{textAlign: 'center', marginTop: 16}}><span className=" ">{formErrors.password}</span></Grid>	
 							)}
 						</Grid>
-						<Grid item xs={12}>	
+						<Grid item xs={12} md={3} style={{textAlign:'center'}}>	
 							<TextField
 								variant="outlined"
 								required
-								fullWidth
+								style={{ height: 40 ,marginTop: 16}}
 								name="confirm_password"
 								label="Confirm Password"
 								type="password"
@@ -314,56 +364,68 @@ export default function SignUp() {
 								onChange={handleChange}
 							/>
 							{formErrors.confirm_password.length>0 && (
-								<span className="errorMessage">{formErrors.confirm_password}</span>
+								<Grid item xs={12} style={{textAlign: 'center', marginTop: 16}}><span className=" ">{formErrors.confirm_password}</span></Grid>	
 							)}
 						</Grid>
-      			
-        
-           
-            <Grid item xs={12}> 
-							<TextField
-								variant="outlined"
-								required
-								fullWidth
-								name="mobile_number"
-								label= "Mobile Number(+91): "
-								type="MobileNo"
-								id="MobileNo"
-							
-								onChange={handleChange}
-							/>
-							{formErrors.mobile_number.length>0 && (
-								<span className="error">{formErrors.mobile_number}</span>
-							)}
+						<Grid item md={3}></Grid>
+						<Grid item xs={12}>
+							<br></br>
 						</Grid>
-					</Grid>
+
+						<Grid item xs={3}></Grid>
+						<Grid item xs={6} style={{textAlign: 'center'}}>
+						{errors.length >0 ?<Alert severity='error'> {errors}</Alert>  : null }		
+						</Grid>
+						<Grid item xs={3}></Grid>
+						<Grid item xs={2}></Grid>
+						<Grid item xs={8} style={{textAlign: 'center'}}>	
+						<FormControlLabel
+       					 control={<Checkbox checked={state.checkedB} onChange={handleChange} name="checkedB" />}
+       					 label="I agree to the terms and conditions and privacy policy"
+						 style={{ marginTop: 8}}
+    					  />
+						</Grid>
+						<Grid item xs={2}></Grid>
+					
+					<Grid xs={3} md={4}></Grid>
+					<Grid item xs={6} md={4} style={{textAlign: 'center'}}>
+					{ state.checkedB ? 
 					<Button
 						type="submit"
-						fullWidth
 						variant="contained"
 						color="primary"
 						className={classes.submit}
 						onClick={handleSubmit}
+						style ={{ height:40 }}
 					>
 						Sign Up
-					</Button>
+					</Button> : 	
+					<Button
+						type="submit"
+						disabled
+						variant="contained"
+						color="primary"
+						className={classes.submit}
+						onClick={handleSubmit}
+						style ={{ height:40 }}
+					>
+						Sign Up
+					</Button> }
+					</Grid>
+					<Grid xs={3} md={4}></Grid>
+					<Grid md={2}></Grid>
 					{disp ? <h4>Please check your email to activate your account</h4> : ''}
-					<Grid container justify="flex-end">
-						<Grid item>
-							<Link href="/login" variant="body2">
+					
+						<Grid item xs={12} md={8} style={{textAlign: 'center'}}>
+							<Link href="/login" variant="body2" style ={{marginTop: 31}}>
 								Already have an account? Sign in
 							</Link>
-						</Grid>
-						<Grid item>
-							<h2 style={{color: '#ff033e',  fontFamily: 'Cinzel'}}>
-						Love Gift of Time ? With your donation of Rs. 999 your social cred$ account is now evergreen for life -you get tax benefits, and it helps us run our programs better and reach more people. Together, lets make this a new social spring revolution
-						</h2>
-						<Button href= '/donate' style={{backgroundColor: '#ff033e', color: '#ffffff'}}>Donate now!
-						</Button>
-						</Grid>
+						
+					</Grid>
+					<Grid md={2}></Grid>
 					</Grid>
 				</form>
-			</div>
+				</div>
 		</Container>
 		</div>
 	);

@@ -15,35 +15,28 @@ import {
 const tokenglobal = localStorage.getItem('token')
 
 const useStyles = makeStyles(() => ({
-    header: {
-      position: 'fixed',
-      top: 0,
-      backgroundColor: "#ffffff",
-     
-    },
-    logo: {
-      fontFamily: "Cinzel",
-      fontWeight: 600,
-      fontSize: 30,
-      color: "#ff033e",
-      textAlign: "left",
-      marginTop: 6
-    },
-    menuButton: {
-        fontFamily: "Open Sans, sans-serif",
-        fontWeight: 700,
-        size: "18px",
-        marginLeft: "40px",
-        textAlign: 'right',
-        marginTop: 18,
-        borderRadius: 20,
-        color: '#ff033e'
-     },
-     toolbar: {
-        display: "flex",
-        justifyContent: "space-between",
-      },
-  }));
+  header: {
+    backgroundColor: "#F26627",
+    height: 80
+  },
+  logo: {
+    fontFamily: "Raleway",
+    fontSize: 40,
+    color: "#ffffff",
+    textAlign: "left",
+    verticalAlign: 'center'
+    
+  },
+  menuButton: {
+      fontFamily: "Open Sans, sans-serif",
+      fontWeight: 800,
+      fontSize: 15,
+      marginTop: 24,
+      color: '#ffffff',
+      width: 120
+      
+   },
+}));
 
 const logout =()=>{
   localStorage.clear()
@@ -72,6 +65,7 @@ function NavbarL(){
             container 
             spacing={20}
             >
+            <Grid item> <img src = 'gotlogo.jpeg' style={{height: 50, width: 50}}></img></Grid>
         <Grid item xs={6}>
           <Typography type="title" color="inherit">
           {GOTLogo}
@@ -84,23 +78,8 @@ function NavbarL(){
           <Grid item xs={0.5}>
           <Button className={menuButton} href='/dashboard'>Dashboard</Button>
           </Grid>
+       
           <Grid item xs={0.5}>
-          <Button className={menuButton}>About</Button>
-          </Grid>
-          <Grid item xs={0.5}>
-            <IconButton className={menuButton}
-              edge="end"
-              aria-label="account of current user"
-              aria-haspopup="true"
-              color="black"
-              href='/profile' 
-              style={{color: 'black', position: 'absolute', right: 150, bottom: 1}}
-              
-            >
-              <AccountCircle ></AccountCircle>
-            </IconButton>
-          </Grid>
-          <Grid item xs={1}>
           <Button className={menuButton} href='/' onClick={logout} >Logout </Button>
           </Grid>
           </Grid>
@@ -110,9 +89,7 @@ function NavbarL(){
       
   const GOTLogo = (
     <Typography variant="h6" component="h1" className={logo} >
-      
-             Gift of Time
-       
+             Gift of Time  
     </Typography>
   );
 

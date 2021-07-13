@@ -92,43 +92,45 @@ export default function  ProfileUpdatePage(){
   
   return(
   
-	<div class='profile'>
 	
-   <div class='details'>
-
-	<Card variant='outlined' style={{width:1000 , marginTop: 100, marginLeft: 200 }}>
-	<CardActionArea style={{width: 1000}}>
+	<Grid container xs={12} >
+	<Grid item xs ={12}> 
+                <h1 style={{fontSize:40,fontFamily:'Raleway', textAlign:'center'}}>Edit Profile</h1> 
+                </Grid>
+	<Grid item xs={3}></Grid>
+	<Grid item  xs={12} md={6} style={{}}>
+	<Card variant='outlined' style={{ marginTop: 20 }}>
+	<CardActionArea>
     <CardMedia
 	className={classes.media}
-	image="blank.png"
-	
-	style={{width: 300, marginLeft: 350, borderRadius: 180, height: 300 }}
+	image="summer.jpeg"
+	style={{width: 10, marginLeft: 350, borderRadius: 180, height: 300 }}
 	/>
 	</CardActionArea>
 		 <CardContent style={{}}>
 	
 		 <Grid container spacing={3} >
-	  <Grid item xs={3}>
+	  <Grid item xs={6} md={3}>
 		<TextField label='First Name' variant='outlined' name ='first_name' placeholder={user['first_name']} onChange={handleChange}> </TextField> 
 	   </Grid>
-	   <Grid item xs={3}>
+	   <Grid item xs={6} md ={3}>
 	   <TextField label='Last Name'   name ='last_name' variant='outlined' placeholder={user['last_name']}  onChange={handleChange}> </TextField> 
 	   
 	   </Grid>
-	   <Grid item xs={3}>
+	   <Grid item xs={6} md={3}>
 	   <TextField label='Mobile Number'   name ='mobile_number' variant='outlined' placeholder={user['mobile_number']} onChange={handleChange}> </TextField>
 	   </Grid>
-	   <Grid item xs={3}>
+	   <Grid item xs={6} md={3}>
 	   <TextField label='Date of birth:' id='date' id='read-only' defaultValue='None' value={user['dob']} variant='outlined' > </TextField>
 	   </Grid>
-	   <Grid item xs={4}>
-	   <TextField label='Email ID: ' value={user['email_id']} defaultValue='nONE' variant='outlined'   style={{width: 300 , fontSize: 100}} /> 
+	   <Grid item xs={12} md={4}>
+	   <TextField label='Email ID: ' value={user['email_id']} defaultValue='nONE' variant='outlined'   style={{ fontSize: 100}} /> 
 	   </Grid>
-	   <Grid item xs={3}>
+	   <Grid item md={3}>
 	   <TextField label='Credit Balance: ' value={user['account_balance']} defaultValue='nONE' variant='outlined' > </TextField>
 		</Grid>
 		<Grid item xs={12}>
-		<TextField label='About Me:' name='about' multiline placeholder={user['about']} variant='outlined' style={{width: 600 }}  onChange={handleChange}> </TextField>
+		<TextField label='About Me:' name='about' multiline placeholder={user['about']} variant='outlined' fullWidth onChange={handleChange}> </TextField>
 		</Grid>
 		
 		<Grid item xs={12}>
@@ -137,11 +139,11 @@ export default function  ProfileUpdatePage(){
 		 </Grid>
 		</CardContent>
 		</Card>
-   
-	  </div>
+		</Grid>
+		</Grid>
+
 	
 
-</div>
       
         
        )  

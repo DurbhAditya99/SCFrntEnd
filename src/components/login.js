@@ -4,16 +4,17 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Alert from '@material-ui/lab/Alert';
+import { useDispatch } from 'react-redux';
+import { loginUser } from './redux/ActionCreator';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -23,15 +24,17 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 		backgroundColor: '#ffffff',
 		borderRadius: 20,
-		width:500
+		height: 553,	
+		zIndex: 5,
+		
 	},
 	avatar: {
 		margin: theme.spacing(1),
-		backgroundColor: '#ffffff',
+		backgroundColor: '#ff8800',
 		height:theme.spacing(12),
 		width: theme.spacing(12),
 		marginTop: theme.spacing(4),
-		color: '#ffdddd'
+		
 	
 	},
 	large: {
@@ -42,16 +45,12 @@ const useStyles = makeStyles((theme) => ({
 		width: '100%', // Fix IE 11 issue.
 		marginTop: theme.spacing(3),
 	},
-	submit: {
-		margin: theme.spacing (3, 0, 2),
-		backgroundColor: '#FF033E'
-	},
 }));
 
 function LoginPage(){
 
     const history = useHistory();
-	
+	const dispatch = useDispatch()
     const initialFormData = Object.freeze({
       email_id: '',
       password: '',
@@ -69,38 +68,14 @@ function LoginPage(){
     const handleSubmit = (e) => {
       e.preventDefault();
       console.log(formData);
-  
-      fetch('http://127.0.0.1:8000/api/user/login/',{
-        method:"POST",
-        headers: {
-          "Content-Type": 'application/json',								
-        },
-        body: JSON.stringify({
-          username: formData.email_id,	
-          password: formData.password,  
-        }),
-  
-      })
-      .then((res) => res.json()
-	  .then(data=> { console.log(data)
-					const token = data['token']
-					const id = data['id']
-					const fn = data['first_name']
-					if (token) {
-						localStorage.setItem('token' , token)
-						localStorage.setItem('userID', id)
-						localStorage.setItem('first_name', fn)
-						window.location.href = '/dashboard';
-						} else {
-							const nfe = data['non_field_errors']
-							console.log(nfe[0])
-							setErrors(nfe[0])
-						}
-				} ))
-      .catch((err) => { 
-        console.log(err.message)
-        
-      })
+
+	  const body = {
+		username: formData.email_id,	
+		password: formData.password,  
+	  }
+	  
+	  dispatch(loginUser(body))
+	  
       
     };
 
@@ -116,22 +91,22 @@ function LoginPage(){
     
   const classes = useStyles();
     return(
-		<div class='login'>
-      <Container component="main" maxWidth="xs">
+		<div >
+		
+      <Container component="main" maxWidth="xs" >
 			<CssBaseline />
 			<div className={classes.paper}>
 				<Avatar className={classes.avatar}></Avatar>
-				<Typography component="h1" variant="h5" style={{color: '#ff033e'}}>
-					 Sign In
-				</Typography>
+
 				{errors.length >0 ?<Alert severity='error'> {errors}</Alert>  : null }
 				<form className={classes.form} noValidate>
-					<Grid container spacing={2}>
-						<Grid item xs={12}>
+					<Grid container spacing={3} style={{zIndex:5}}>
+						<Grid item xs={12} style={{textAlign: 'center'}}>
 							<TextField
 								variant="outlined"
 								required
-								fullWidth
+								
+								style={{height: 40, width: 300}}
 								id="email_id"
 								label="Email Address"
 								name="email_id"
@@ -139,11 +114,12 @@ function LoginPage(){
 								onChange={handleChange}
 							/>
 						</Grid>
-						<Grid item xs={12}>
+						<Grid item xs={12} style={{textAlign: 'center'}}>
 							<TextField
 								variant="outlined"
 								required
-								fullWidth
+								
+								style={{height: 40, width:300}}
 								name="password"
 								label="Password"
 								type="password"
@@ -152,17 +128,38 @@ function LoginPage(){
 								onChange={handleChange}
 							/>
 						</Grid>
-
+						<Grid item xs={12} style={{textAlign: 'center'}}>
 					<Button
 						type="submit"
-						fullWidth
+						
+						style={{height: 40, marginTop: 16}}
 						variant="contained"
 						color="primary"
-						className={classes.submit}
 						onClick={handleSubmit}
 					>
 						Sign In
 					</Button>
+					</Grid>
+					<Grid item xs={12} style={{textAlign: 'center'}}>
+					<Button
+						type="submit"
+						style={{height: 20, width: 177, marginTop: 16, fontSize: 15}}
+						color="primary"
+					>
+						Forgot Password
+					</Button>
+					</Grid>
+					<Grid item xs={12} style={{textAlign: 'center'}}>
+					<Button
+						type="submit"
+						fullWidth
+						style={{height: 23, width: 233, marginTop: 48, fontSize: 11}}
+						color="primary"
+						href= '/signup'
+					>
+						Don't have an account? Sign up
+					</Button>
+					</Grid>
           </Grid>
 				</form>
 			</div>

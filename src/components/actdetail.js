@@ -1,17 +1,14 @@
 import React, { useEffect } from 'react'
 import {useState} from 'react'
-import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import EditIcon from '@material-ui/icons/Edit';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import { TextField } from '@material-ui/core';
+import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@material-ui/core';
+import { fetchUser,singleActivity } from './redux/ActionCreator';
 
 const useStyles = makeStyles({
   root: {
@@ -30,11 +27,13 @@ const userID = localStorage.getItem('userID')
 
 function ActDetail(props){
     
-  const [act,setAct] = useState({})
   const classes = useStyles();
   const {id} = props.match.params
   const [users,setUsers] = useState()
-
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.users.users);
+  const act = useSelector((state) => state.activity.activity)
+  const actuser = useSelector((state)=> state.users.users)
   const addUser =() =>{
  
     fetch(`http://127.0.0.1:8000/api/detail/${id}`,{
@@ -55,33 +54,34 @@ function ActDetail(props){
   
   
   useEffect(() =>{
-        
-    fetch(`http://127.0.0.1:8000/api/detail/${id}`,{
-      method: 'GET',
-      headers: {
-        "Content-Type": 'application/json',
-        "Authorization" : `Token ${token}`								
-      },
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data)
-        setAct(data)
-      } )
+
+    dispatch(fetchUser(token,userID))
+    dispatch(singleActivity(token,id))
+
+    dispatch(fetchUser(token,act['founder']))
+
     }, [])
 
    
   
   return(
 
-         	  <div style={{display:'block'}}>
-           
-            <Card variant='outlined'  style={{width:1000 , marginTop: 100, marginLeft: 200 }}>
+         	  <Grid container>
+               <Card style={{height: 30 , marginTop: 100, backgroundColor: '#ffffff' }}>
+               <Grid item xs ={12}>
+                 <Typography component='h1' style={{textAlign: 'center', fontSize: 20 , fontFamily: 'Cinzel'}}> 
+                   Account Credits: {user['account_balance']}
+                   </Typography>
+                 </Grid>  
+               </Card>
+            <Grid item xs={12}>
+            <Card variant='outlined'  style={{marginTop: 100, backgroundColor: '#ffffff' }}>
                <CardContent style={{}}>
-               <Grid container spacing={3}  >
-            <Grid item xs={24}>
-            <Typography component='h1' style={{textAlign: 'center', fontSize: 40 , fontFamily: 'Cinzel'}}> 
-            {act['title']}
+               <Grid container spacing={3}>
+              
+            <Grid item xs={12}>
+            <Typography component='h1' style={{fontSize: 40 , fontFamily: 'Raleway'}}> 
+            {act['founder_name']}'s {act['title']}
             </Typography>
             </Grid> 
             <Grid item xs={12}>
@@ -89,8 +89,28 @@ function ActDetail(props){
             name='Description'
             defaultValue = 'None'
             value = {act['description']}
-            variant= 'outlined'
             label='Description'
+            multiline
+            >
+            </TextField>
+            </Grid> 
+            <Grid item xs={12}>
+            <TextField
+            name='Description'
+            defaultValue = 'None'
+            value = {act['what_donating']}
+            label= 'What are you donating'
+            multiline
+            >
+              
+            </TextField>
+            </Grid> 
+            <Grid item xs={12}>
+            <TextField
+            name='Description'
+            defaultValue = 'None'
+            value = {act['where_donating']}
+            label='Where?'
             multiline
             style={{width: 800}}
             >
@@ -111,7 +131,6 @@ function ActDetail(props){
             name='Description'
             defaultValue = 'None'
             value = {act['start_date']}
-            variant= 'outlined'
             label='Start Date: '
             >
             </TextField>
@@ -121,7 +140,6 @@ function ActDetail(props){
             name='Description'
             defaultValue = 'None'
             value = {act['end_date']}
-            variant= 'outlined'
             label='Expiry Date: '          
             >
             </TextField>
@@ -131,7 +149,6 @@ function ActDetail(props){
             name='Description'
             defaultValue = 'None'
             value = {act['category']}
-            variant= 'outlined'
             label='Category: '          
             >
             </TextField>
@@ -142,7 +159,17 @@ function ActDetail(props){
             defaultValue = 'None'
             value = {act['vol_req']}
             variant= 'outlined'
-            label='Volunteers Required: '          
+            label='Minimum Volunteers Required: '          
+            >
+            </TextField>
+            </Grid>
+            <Grid item xs={3}>
+            <TextField
+            name='mother_vol'
+            defaultValue = 'None'
+            value = {act['mother_vol']}
+            variant= 'outlined'
+            label='Minimum Mother Volunteers Required: '          
             >
             </TextField>
             </Grid>
@@ -160,7 +187,7 @@ function ActDetail(props){
             <TextField
             name='founder'
             defaultValue = 'None'
-            value = {act['founder']}
+            value = {act['founder_name']}
             variant= 'outlined'
             label='Founder'          
             >
@@ -181,13 +208,14 @@ function ActDetail(props){
             </Grid> 
             <Grid item xs= {12}>
             <Typography>{users}</Typography>  
-            </Grid> 
+            </Grid>
+     
             </Grid>
             </CardContent>
             </Card>
-          
-            </div>
-
+            </Grid>
+            </Grid>
+  
    
       
         

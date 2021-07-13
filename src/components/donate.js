@@ -9,41 +9,38 @@ import { MenuItem } from "@material-ui/core";
 export default function DonatePage(){
 
     return(
-        <Grid container spacing={5} style={{textAlign:'left',marginLeft:30, marginTop: 120}}>
+        <Grid container spacing={1} style={{textAlign:'center', marginTop: 120}}>
             <Grid item xs ={12}>
-        <Typography style={{fontSize:30, fontFamily: 'Cinzel'}}>Donate generously</Typography>
+        <Typography style={{fontSize:30, fontFamily: 'Raleway'}}>Donate generously</Typography>
         </Grid>
         <Grid item xs ={12}>
-        <Typography style={{fontSize:30,fontFamily: 'Cinzel'}}>Your donation qualifies for 80G tax rebate </Typography>
+        <Typography style={{fontSize:30,fontFamily: 'Raleway'}}>Your donation qualifies for 80G tax rebate </Typography>
         </Grid> 
         <Grid item xs ={12}>
             <TextField
-            label='Donor Name'
-            style={{width:1000}}
-            >
-
+            variant= 'outlined'
+            label='Donor Name'>
+                
             </TextField>
         
         </Grid>
         <Grid item xs ={12}>
             <TextField
+            variant= 'outlined'
             label='Donor Email ID'
-            style={{width:1000}}
             >
-
             </TextField>
         
         </Grid>
         <Grid item xs ={12}>
-            <TextField
+        <Typography>  How much would you like to donate? </Typography>
+        <TextField
             type='number'
-            label='How much would you like to donate?'
-            style={{width:1000}}
-            placeholder='₹5000 / ₹15,000 / ₹25,000'
-            >
-
+            name="size"
+            variant= 'outlined'
+            style={{height: 30}}
+            inputProps ={{min: 200, step: 100}}>    
             </TextField>
-        
         </Grid>
         </Grid>
     )
