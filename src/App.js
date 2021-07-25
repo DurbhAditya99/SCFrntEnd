@@ -19,7 +19,7 @@ function App() {
             <Navbar /> 
             </div>
             <div style={{marginBottom: 200}}>
-            <div style={{position: 'fixed', overflow: 'auto', zIndex: -5, maxWidth: 1000}}>
+            <div style={{position: 'fixed', overflow: 'auto', zIndex: -2, maxWidth: 1000}}>
             <Particles  height="100vh" width="100vw" params={{
                 particles: {
                     number: {

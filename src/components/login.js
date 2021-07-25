@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { loginUser } from './redux/ActionCreator';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Particles from 'react-particles-js';
 toast.configure()
 
 const useStyles = makeStyles((theme) => ({
@@ -91,9 +92,9 @@ function LoginPage(){
     
   const classes = useStyles();
     return(
-		<div >
-		
-      <Container component="main" maxWidth="xs" >
+		<div   >
+	
+      <Container component="main" maxWidth="xs" style={{zIndex:10}}>
 			<CssBaseline />
 			<div className={classes.paper}>
 				<Avatar className={classes.avatar}></Avatar>
@@ -145,6 +146,7 @@ function LoginPage(){
 						type="submit"
 						style={{height: 20, width: 177, marginTop: 16, fontSize: 15}}
 						color="primary"
+						disabled
 					>
 						Forgot Password
 					</Button>
@@ -164,6 +166,7 @@ function LoginPage(){
 				</form>
 			</div>
 		</Container>
+		
 		</div>
     )
 

@@ -244,13 +244,18 @@ html,body{
     background-image:
     linear-gradient( to left , rgba(255, 255, 255, 1), rgba(255, 1, 0, 0), rgba(255, 0, 0, 0)),
     url('images/cover2.jpeg');
-    width: 793px;
+    width: 803px;
     height: 678px;
     background-size: cover;
     float: right;
 
 }
 
+.image {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
 .register .errorMessage{
         color: red
 }
@@ -271,9 +276,57 @@ html,body{
     color: black;
     padding: 12px 16px;
     text-decoration: none;
+    font-family: 'Raleway';
     display: block;
+    background-color: #ffffff;
   }
   
   .dropdown-content a:hover {background-color: #ddd;}
   
   .dropdown:hover .dropdown-content {display: block;}
+
+  .responsive {
+    width: 100%;
+    height: auto;
+  }
+
+  .alignMe{
+    list-style-type: none;
+  }
+  .alignMe b {
+    display: inline-block;
+    width: 50%;
+    position: relative;
+    
+    
+  }
+  
+  .alignMe b::after {
+    content: ":";
+    position: absolute;
+    right: 15px;
+  }
+
+  #footer {
+    background-image: linear-gradient(to bottom, orange, red);
+  }
+
+  .Typography {
+      font-family: 'Raleway';
+  }
+
+ 
+.myDIV:hover + .hide {
+    display: inline-block;
+    
+    position:relative
+  }
+
+.hide {
+    display: none;
+  }
+
+.myDIV{
+    
+    font-size: 20px
+}

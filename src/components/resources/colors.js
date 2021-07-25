@@ -1,9 +1,9 @@
 const colors =[
     {
-        value : '#00FF00',
+        value :'#00FF00',
         label : 'Green'
     },
-    {
+    { 
         value : '#FFFF00',
         label : 'Yellow'
     },

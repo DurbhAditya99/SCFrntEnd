@@ -15,7 +15,6 @@ import { MenuItem } from '@material-ui/core';
 import { TextFieldsRounded } from '@material-ui/icons';
 import { Backdrop } from '@material-ui/core';
 import { CircularProgress } from '@material-ui/core';
-import Moment from 'moment';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -32,9 +31,10 @@ const userID = localStorage.getItem('userID')
 const pict = localStorage.getItem('pic')
 
 
-function ProfilePage(){
+function ProfileViewPage(props){
   
   const user = useSelector((state) => state.users.users)
+  const {id} = props.match.params
   const [acts,setAct] = useState([])
   const dispatch = useDispatch()
   const classes = useStyles();
@@ -44,8 +44,8 @@ function ProfilePage(){
   
 
     useEffect(() =>{
-      dispatch(fetchUser(token,userID))
-      fetch(`http://127.0.0.1:8000/api/user/act`,{
+      dispatch(fetchUser(token,id))
+      fetch(`https://socialcredsbnd.herokuapp.com/api/user/act`,{
         method: 'GET',
         headers: {
           "Content-Type": 'application/json',
@@ -79,101 +79,41 @@ function ProfilePage(){
   return(
             <Grid container spacing={1} style={{backgroundColor:'#ffffff',zIndex: 10, borderRadius:30 , marginTop: 80,fontSize: 20,fontFamily:'Raleway'}}> 
                  <Grid item md={1}></Grid>
-                <Grid item md={10 }>               
+                <Grid item md={6}>               
                 
                  <Card style={{borderRadius:30, zIndex:10}}>        
                    <Grid container spacing={1}>     
               
             
                 <Grid item md={1}></Grid>
-                <Grid item xs ={12} md={3} style={{textAlign:'center'}}> 
-                <h1 style={{fontSize:40,fontFamily:'Raleway',textAlign:'center'}}>My Profile<Button href='/profile/edit'><EditIcon /></Button></h1> 
-                </Grid>
-                <Grid item md={3} xs={1}></Grid>
+                <Grid item xs={12} md={4}><img src={user['profile_pic']} style={{height:200, width:200, borderRadius:160}}></img></Grid>
+                <Grid item xs ={8} md={3}> 
                 
-             <Grid item xs={12}></Grid>
+                <h1 style={{fontSize:40,fontFamily:'Raleway',textAlign:'left'}}>{user['first_name']}&nbsp;
+            {user['last_name']}</h1> 
+                </Grid>
+                <Grid item md={12} xs={1}></Grid>
+               
+              <Grid item xs={12}></Grid>
               <Grid item md={1}></Grid>
-              <Grid item xs={12} md={2} style={{textAlign:'center'}}>
-              <img class='responsive' style={{ borderRadius: 30,borderRadius:100, width:200,height:200}}  src={user['profile_pic']} />
-             
-             
-              <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
-                <Grid container style={{backgroundColor: '#ffffff', color:'black', textAlign:'center'}}>
-                  <Grid item xs={12}>
-                    <Typography style={{fontSize:40}}>Pick your avatar</Typography>
-                   
-                  </Grid>
-                 
-              {pics.map((option)=> (
-                <Grid item xs={4} style={{float:'center'}}>
-                  
-								<MenuItem onClick={() =>{ setPic(option.value)
-                                          setVal(true)
-                                                                }} key={option.value} value={option.value}>
-									{option.label}
-								</MenuItem>
-               
-                </Grid>
-							  ))}
-              
-                </Grid>
-              </Backdrop>
-
-                
-               
+              <Grid container spacing={1} xs={12} md={12} style={{outlineStyle:'solid',textAlign:'center',backgroundColor: '#ffffff',borderRadius:20, fontSize: 40}}>
+        
+        <Grid item xs={3} md={4}><Typography>Clocked hours</Typography></Grid>
+        <Grid item xs={3} md={4}><Typography>Credits</Typography></Grid>
+        <Grid item xs={3} md={4}><Typography>Debits</Typography></Grid>
+       
+        <Grid item xs={12}></Grid>
+        
+        
+        
+        <Grid item xs={3} md={4}>{user['clocked_hours']}</Grid>
+        <Grid item xs={3} md={4} >{user['account_balance']}</Grid>
+        <Grid item xs={2} md={4}>{user['debits']}</Grid>
         </Grid>
-        <Grid item xs={12} md={4}>
-          <Grid container spacing={1} style={{height: 144,fontFamily:'Raleway', fontSize: 20,textAlign:'left'}}>
-          <Grid item xs={12}></Grid>
-          <Grid item xs={12}></Grid>
-          <Grid item xs={12}></Grid>  
-            <Grid item md={1}></Grid>
-             <Grid container md={12} style={{textAlign:'center'}} spacing={1}>                                                   
-            <Grid item xs={12} style={{fontSize: 24}}>
-              <strong>
-            {user['first_name']}&nbsp;
-            {user['last_name']}
-            </strong>
-            </Grid>
-            <Grid item xs={12} style={{}}> 
-            User ID: #{user['id']}
-            
-            </Grid>
-            <Grid item  xs={12}>
-            
-            Joining date: {user['created_at'] ?Moment(user['created_at']).format('d MMM YYYY'): ''}
-            
-            </Grid>
-            <Grid item  xs={12}>
-            <i class="material-icons">location_on</i>
-           Bangalore
-            
-            </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={12}></Grid>
-        <Grid item xs={12}></Grid>
-        <Grid item xs={12}></Grid>
         <Grid item xs={12}></Grid>
         <Grid item xs={1} md={1}></Grid>
-        <Grid container spacing={1} xs={12} md={12} style={{outlineStyle:'solid' ,textAlign:'center',backgroundColor: '#ffffff',borderRadius:20, fontSize: 40}}>
-        
-        <Grid item xs={4} md={4} ><Typography>Clocked hours</Typography></Grid>
-        <Grid item xs={4} md={4}><Typography>Credits</Typography></Grid>
-        <Grid item xs={4} md={4}><Typography>Debits</Typography></Grid>
        
-        <Grid item xs={12}></Grid>
-        
-        
-      
-        <Grid item xs={4} md={4}>{user['clocked_hours']}</Grid>
-        <Grid item xs={4} md={4} >{user['account_balance']}</Grid>
-        <Grid item xs={4} md={4}>{user['debits']}</Grid>
-        </Grid>
        
-        <Grid item xs={12}></Grid>
-        <Grid item xs={12}></Grid><Grid item xs={12}></Grid> <Grid item xs={12}></Grid>
         <Grid container maxWidth='md' style={{textAlign:'left'}}>
         <Grid item xs={1} md={1}></Grid>
         <Grid item xs={6} style={{fontSize:30}}><strong>About</strong></Grid>
@@ -204,7 +144,22 @@ function ProfilePage(){
 
             </Card>
             </Grid>
-                                                      
+          <Grid item md={4}>
+          <Card>
+           <Grid container>
+          {acts ? acts.map((info)=>{
+
+            return(
+                <Card>
+                  {info.title}
+                </Card>
+            )
+
+
+          }) : '' }
+           </Grid>
+          </Card>
+          </Grid>                                
           </Grid>
           
           
@@ -220,4 +175,4 @@ function ProfilePage(){
 
 
 
-export default ProfilePage
+export default ProfileViewPage

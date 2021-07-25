@@ -35,11 +35,38 @@ export const updateUser = (token, userID,body) =>{
       .then(res => res.json())
       .then((data) => {
         console.log(data)
+        toast.success('Profile successfully updated')
         dispatch({ type: ActionTypes.UPDATE_USER, payload: data })
+        
+        
     })
 
   }
 }
+
+export const updateActivity = (token,id,body) =>{
+
+  return function(dispatch){
+    fetch(`https://socialcredsbnd.herokuapp.com/api/detail/${id}`,{
+      method: 'PUT',
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": 'application/json',
+        "Authorization" : `Token ${token}`								
+      },
+    })
+    .then(res => res.json())
+    .then((data) => {
+      console.log(data)
+      toast.warning('Updating.....')
+      dispatch({ type: ActionTypes.UPDATE_POST, payload: data })
+      setTimeout(()=> {},2000)
+      
+  })
+  }
+
+}
+
 
 
 export const getActivity = (token) =>{
@@ -81,22 +108,22 @@ export const singleActivity = (token,id) => {
 }
 
 
-export const addActivity = (token,body) => {
+export const addActivity = (token,body,setAct) => {
   return function(dispatch){
-    fetch('https://socialcredsbnd.herokuapp.com/api/create',{
+    fetch('https://socialcredsbnd.herokuapp.com/api/create/',{
 			method:"POST",
-			body: JSON.stringify(body),
+			  body: JSON.stringify(body),
       headers: {
-				  "Content-Type": 'application/json',		
-          "Authorization" : `Token ${token}`,
-          "Access-Control-Request-Headers" : 'Authorization'
-			},
+				  "Content-Type": 'application/json',
+          'Accept': 'application/json',		
+          "Authorization" : `Token ${token}`		},
     })
     .then(res => res.json())
     .then(data => {
       console.log(data)
-      toast.success('Your program has successfully')
+      toast.success('Your program is live!')
       dispatch({ type: ActionTypes.ADD_POST, payload: data }) 
+      setAct(data)
       
     } )
   }
@@ -170,7 +197,7 @@ export const registerUser = (body) =>{
           toast.warning('User with this Email ID already exists')
         }
       } else{
-        toast.success('Success!! Please check your email id ')
+        window.location.href= '/email'  
       }
 				})
 

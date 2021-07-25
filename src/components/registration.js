@@ -223,16 +223,17 @@ export default function SignUp() {
 						</Grid>
 						<Grid item md={3}></Grid>
 						<Grid item xs={1} md={3}></Grid>
-						<Grid item xs={3} md={2} style={{textAlign: 'center'}}>
+						<Grid item xs={3} md={2} >
            				 <TextField
             			id="dob_d"
            				name='dob_d'
             			label="Date of birth"
             			select
+						fullWidth
 						size = 'small'
 						placeholder = 'Enter date'
 						variant = 'outlined'
-						style={{width:90, height: 40  ,marginTop:12}}
+						style={{ height: 40  ,marginTop:12}}
           				onChange={handleChange}
          			 	className={classes.textField}
            				InputLabelProps={{
@@ -247,15 +248,16 @@ export default function SignUp() {
 							  ))}
 							  </TextField>
 						</Grid>
-						<Grid item xs={3} md={2} style={{textAlign: 'center'}}>
+						<Grid item xs={3} md={2} >
            				 <TextField
             			id="dob_m"
            				name='dob_m'
             			label="Month of birth"
             			select	
+						fullWidth
 						size = 'small'
 						variant = 'outlined'
-						style={{width:90, height: 40  ,marginTop: 12}}
+						style={{height: 40  ,marginTop: 12}}
           				onChange={handleChange}
          			 	className={classes.textField}
            				InputLabelProps={{
@@ -271,15 +273,16 @@ export default function SignUp() {
 							  ))}
 							</TextField>  
 						</Grid>
-						<Grid item xs={3} md={2} style={{textAlign: 'center'}}>
+						<Grid item xs={3} md={2} >
            				 <TextField
             			id="dob_y"
            				name="dob_y"
             			label="Year of Birth"
             			select
+						fullWidth
 						size = 'small'
 						variant = 'outlined'
-						style={{width:90, height: 40  ,marginTop: 12}}
+						style={{height: 40  ,marginTop: 12}}
           				 onChange={handleChange}
          			 	 className={classes.textField}
            				InputLabelProps={{
@@ -298,7 +301,7 @@ export default function SignUp() {
 						<Grid item xs={1} md={3}></Grid>
 						<Grid item xs={1} md={3}></Grid>	
 						<Grid item xs={10} md={6}>
-					    <Typography style={{marginTop:8,marginBottom:8, fontFamily:'Raleway'}}>Are you above 18?(if below 18 please provide parents' email id and mobile number)</Typography>	
+					    <Typography style={{marginTop:8,marginBottom:8, fontFamily:'Raleway'}}>If below 18 please provide parents' email id and mobile number</Typography>	
 						</Grid>	
 						<Grid item xs={1} md={3}></Grid>	
 						<Grid item md={3}></Grid>
@@ -378,12 +381,12 @@ export default function SignUp() {
 						</Grid>
 						<Grid item xs={3}></Grid>
 						<Grid item xs={2}></Grid>
-						<Grid item xs={8} style={{textAlign: 'center'}}>	
+						<Grid item xs={8} style={{textAlign: 'center', fontSize:16}}>	
 						<FormControlLabel
        					 control={<Checkbox checked={state.checkedB} onChange={handleChange} name="checkedB" />}
-       					 label="I agree to the terms and conditions and privacy policy"
+       					
 						 style={{ marginTop: 8}}
-    					  />
+    					  />I agree to the <a href='https://drive.google.com/file/d/1tlqy-e1LNcCIEORd-E0xFAeK_HzoWZLL/view?usp=sharing'>Terms and Conditions</a> and <a href='https://drive.google.com/file/d/1N3p9Wr2ksD61Cm1r9vjR0JCKGLRaLGSQ/view?usp=sharing'>Privacy Policy</a>	
 						</Grid>
 						<Grid item xs={2}></Grid>
 					

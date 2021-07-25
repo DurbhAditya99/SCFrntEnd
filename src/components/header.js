@@ -9,6 +9,9 @@ import {
   import IconButton from '@material-ui/core/IconButton';
   import MenuIcon from '@material-ui/icons/Menu'; 
   import { Drawer } from '@material-ui/core';
+  import { useSelector } from 'react-redux';
+  import Moment from 'moment';
+
 
 const tokenglobal = localStorage.getItem('token')
 
@@ -38,7 +41,7 @@ const useStyles = makeStyles(() => ({
         fontSize: 15,
         marginTop: 24,
         color: '#ffffff',
-        width: 120
+       
         
      },
      menuButtonM: {
@@ -48,16 +51,17 @@ const useStyles = makeStyles(() => ({
       marginTop: 24,
       width: 50,
       color: '#ffffff'
-      
    },
   }));
 
+ 
 
   const logout =() =>{
-    localStorage.clear()
+    localStorage.removeItem('token')
     window.location.href = '/';
   }
 
+  const pict = '/' + localStorage.getItem('pic')
 
 function Navbar(){
       
@@ -67,6 +71,8 @@ function Navbar(){
       drawerOpen: false
     });
     const { mobileView,drawerOpen  } = state;
+    const [color,setColor] = useState('#F9A26C')
+    const user = useSelector((state) => state.users.users)
 
     useEffect(() => {
       const setResponsiveness = () => {
@@ -86,17 +92,23 @@ function Navbar(){
 
 
     const displayDesktop = () => {
-        return (      
+
+        return (
+          
+            
+
+
              localStorage.getItem('token') ? 
              
         
             <Toolbar> 
             <Grid
-              justify="space-between" 
+              
               container 
-              style={{marginRight: 80}}
+              spacing={6}
               >
-            <Grid item xs={1} style={{marginTop:14}}> <img src = 'gotlogo.jpeg' style={{height: 52, width: 52, marginLeft: 80, borderRadius: 50}}></img></Grid>
+                <Grid item md={0.5}></Grid>
+            <Grid item xs={0.5}  style={{marginTop:14}}> <img src = '/gotlogo.jpeg' style={{height: 52, width: 52,  borderRadius: 50}}></img></Grid>
           
             <Grid item  xs={1} md={6} >
             <Typography type="title" color="inherit" style={{marginTop: 10}}>
@@ -111,11 +123,11 @@ function Navbar(){
              <Grid item xs={1}>
             <Button className={menuButton} style={{borderRadius: 20}}  href='/dashboard' ><Typography style={{fontFamily: 'Raleway'}}> Dashboard </Typography> </Button>
             </Grid>
-            <Grid item xs={1}>
-           <div class='dropdown'>
-            <Button style={{width: 120,  marginTop: 18}}>
-              <Typography style={{color: '#ffffff',fontFamily: 'Raleway'}}>My Profile</Typography> 
-              <img src='life.jpg' style={{height: 40, width:40, borderRadius: 100 }}></img>
+            <Grid item xs={1} style={{textAlign : 'center'}}>
+           <div class='dropdown' >
+            <Button style={{  marginTop: 18}} href='/profile'>
+              <Typography style={{color: '#ffffff',  fontSize:16,fontFamily: 'Raleway', zIndex:30}}> My Profile </Typography>  &nbsp;
+              <img src={user['profile_pic']} style={{height: 40, width:40, borderRadius: 100 }}></img>
               </Button>
                <div class="dropdown-content">
                <a href='/profile'>View Profile</a>
@@ -123,27 +135,29 @@ function Navbar(){
                </div> 
             </div>
             </Grid>
-            <Grid item xs={1}>
-            <Button className={menuButton} style={{borderRadius: 20, backgroundColor:'#F9A26C', width:120, height:40}} href='/tncs' ><Typography style={{fontFamily: 'Raleway'}}>Donate</Typography> </Button>
-            </Grid>
+            
+            <Grid item md={1}>
+             <Button className={menuButtonM} style={{borderRadius: 20, backgroundColor:'#F9A26C', width:120, height:40}} href='/donate' ><Typography style={{fontFamily: 'Raleway'}}>Donate</Typography> </Button>
+             </Grid>
             </Grid>
             </Toolbar>
             
              : 
              <Toolbar> 
          
-               <Grid
-               justify="space-between" 
-               container 
-               style={{marginRight: 80}}
-               >
-             <Grid item md={1} style={{marginTop:14,verticalAlign: 'center'}}> <img src = 'gotlogo.jpeg' style={{height: 52, width: 52, marginLeft: 60, borderRadius: 50}}></img></Grid>
+         <Grid
+              
+              container 
+              spacing={6}
+              >
+                <Grid item md={0.5}></Grid>
+            <Grid item xs={0.5}  style={{marginTop:14}}> <img src = '/gotlogo.jpeg' style={{height: 52, width: 52,  borderRadius: 50}}></img></Grid>
           
-          <Grid item md={7}>
-          <Typography type="title" color="inherit" style={{marginTop: 10}}>
-          {GOTLogo}
-          </Typography>
-          </Grid> 
+            <Grid item  xs={1} md={6} >
+            <Typography type="title" color="inherit" style={{marginTop: 10}}>
+            {GOTLogo}
+            </Typography>
+            </Grid> 
           
        
            <Grid item md={1}>
@@ -151,13 +165,15 @@ function Navbar(){
              </Grid> 
              
               <Grid item md={1}>
-             <Button className={menuButtonM} style={{borderRadius: 20}}  href='/' ><Typography style={{fontFamily: 'Raleway'}}> About </Typography> </Button>
+             <Button className={menuButtonM} style={{borderRadius: 20}}  href='http://www.giftoftime.in/index.html' ><Typography style={{fontFamily: 'Raleway'}}> About </Typography> </Button>
              </Grid>
+            
              <Grid item md={1}>
              <Button className={menuButtonM} style={{borderRadius: 20}}  href='/login' ><Typography style={{fontFamily: 'Raleway'}}> Login </Typography> </Button>
              </Grid>
+            
              <Grid item md={1}>
-             <Button className={menuButtonM} style={{borderRadius: 20, backgroundColor:'#F9A26C', width:120, height:40}} href='/tncs' ><Typography style={{fontFamily: 'Raleway'}}>Donate</Typography> </Button>
+             <Button className={menuButtonM} style={{borderRadius: 20, backgroundColor:'#F9A26C', width:120, height:40}} href='/donate' ><Typography style={{fontFamily: 'Raleway'}}>Donate</Typography> </Button>
              </Grid>
           
              </Grid>
@@ -180,7 +196,7 @@ function Navbar(){
           <Toolbar> 
        <IconButton   {...{
             edge: "start",
-            color: "inherit",
+            color: 'inherit',
             "aria-label": "menu",
             "aria-haspopup": "true",
             onClick: handleDrawerOpen,
@@ -207,7 +223,7 @@ function Navbar(){
         <Button onClick={handleDrawerClose} style={{backgroundColor:'#ff8800',height:80,float:'right',color: '#ffffff',fontSize:40}}><i class='material-icons'>cancel</i></Button>
         </Grid>
         <Grid item xs={12}>
-        <img src='logo.png' style={{height: 219 , width: 190, marginTop: 39}}></img>
+        <img src='/logo.png' style={{height: 219 , width: 190, marginTop: 39}}></img>
         </Grid>
         <Grid item xs={12}>
         <Button href='/create' ><Typography style={{fontFamily: 'Raleway'}}>Create</Typography> </Button> 
@@ -223,7 +239,7 @@ function Navbar(){
         </Grid>
         <Grid item xs={12}></Grid>
         <Grid item xs={12}>
-        <Button href='/tncs' style={{backgroundColor:'#ff8800',fontFamily:'Raleway', color:'#ffffff'}}><Typography style={{fontFamily: 'Raleway'}}>Donate </Typography> </Button> 
+        <Button href='/donate' style={{backgroundColor:'#ff8800',fontFamily:'Raleway', color:'#ffffff'}}><Typography style={{fontFamily: 'Raleway'}}>Donate </Typography> </Button> 
         </Grid>
 
         </Grid>
@@ -231,7 +247,7 @@ function Navbar(){
         </Drawer>
         <Grid container style={{marginTop: 20}}>
         <Grid item xs={3}>
-        <img src = 'gotlogo.jpeg' style={{height: 52, width: 52, borderRadius: 50}}></img>
+        <img src = '/gotlogo.jpeg' style={{height: 52, width: 52, borderRadius: 50}}></img>
         </Grid>
         {GOTLogo1}
         </Grid>
@@ -266,7 +282,7 @@ function Navbar(){
         <Button onClick={handleDrawerClose} style={{backgroundColor:'#ff8800',height:80,float:'right',color: '#ffffff',fontSize:40}}><i class='material-icons'>cancel</i></Button>
         </Grid>
         <Grid item xs={12}>
-        <img src='logo.png' style={{height: 219 , width: 190, marginTop: 39}}></img>
+        <img src='/logo.png' style={{height: 219 , width: 190, marginTop: 39}}></img>
         </Grid>
         <Grid item xs={12}>
         <Button href='/' ><Typography style={{fontFamily: 'Raleway'}}>Home </Typography> </Button> 
@@ -282,7 +298,7 @@ function Navbar(){
         </Grid>
         <Grid item xs={12}></Grid>
         <Grid item xs={12}>
-        <Button href='/tncs' ><Typography style={{fontFamily: 'Raleway'}}>Donate </Typography> </Button> 
+        <Button href='/donate' ><Typography style={{fontFamily: 'Raleway'}}>Donate </Typography> </Button> 
         </Grid>
         </Grid>
         </Drawer>
