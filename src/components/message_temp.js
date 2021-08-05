@@ -28,7 +28,7 @@ const Message = (props)=>{
             You have credited with a time bank balance 1.0
             </Grid>
             <Grid item xs={12} style={{textAlign:'center'}} >
-            <Button href='/login'>Login</Button>
+            <Button href='/login' style={{backgroundColor:'orange', color:'white'}}>Login</Button>
             </Grid>
         </Grid>
     )

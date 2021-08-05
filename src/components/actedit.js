@@ -13,6 +13,7 @@ import { MenuItem } from '@material-ui/core';
 import { Select } from '@material-ui/core';
 import { updateActivity,updateActivityPic } from './redux/ActionCreator';
 import Backdrop from '@material-ui/core/Backdrop';
+import { useHistory } from 'react-router';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +31,7 @@ const token = localStorage.getItem('token')
 const userID = localStorage.getItem('userID')
 
 function ActEdit(props){
-    
+  const history = useHistory()
   const classes = useStyles();
   const {id} = props.match.params
   const [users,setUsers] = useState()
@@ -118,6 +119,7 @@ if (image){
     })
 })
 }
+history.push('/')
 }
   
 
@@ -156,8 +158,8 @@ if (image){
           console.log(data)
         } )
       setTimeout(()=>{
-        window.location.href = '/dashboard'
-      },2000)
+        window.location.href = '/'
+      },1500)
      
       }
   
@@ -175,6 +177,19 @@ if (image){
             <Typography component='h1' style={{fontSize: 35 , fontFamily: 'Raleway'}}> 
             {act['founder_name']}'s {act['title']}    ( EDITING )
             </Typography>
+            </Grid> 
+            <Grid item xs={12}>
+              <Typography style={{fontFamily: 'Raleway'}}><strong>Title </strong></Typography>
+            <TextField
+            name="title"
+            id='title'
+            multiline
+            fullWidth
+            defaultValue= {act['title']}
+            onChange={handleChange}
+            >
+              
+            </TextField>
             </Grid> 
             <Grid item xs={12}>
               <Typography style={{fontFamily: 'Raleway'}}><strong>Description </strong></Typography>
@@ -216,7 +231,7 @@ if (image){
             </TextField>
             </Grid> 
             <Grid item xs={12} md={3}>
-            <Typography> <strong> Start Date </strong></Typography>
+            <Typography  style={{fontFamily: 'Raleway'}}> <strong> Start Date ({act['start_date']})</strong></Typography>
             <TextField
             id="start_date"
       			name='start_date'
@@ -232,7 +247,7 @@ if (image){
             </Grid> 
          
             <Grid item xs={4} md={3}>
-            <Typography> <strong> Category </strong></Typography>
+            <Typography  style={{fontFamily: 'Raleway'}}> <strong> Category ( {act['category']} ) </strong></Typography>
             <Select
                     labelId="demo-simple-select-label"
                     id="category"
@@ -252,8 +267,8 @@ if (image){
                    
                     </Select>
             </Grid>
-            <Grid item xs ={12} md={2}>
-						<Typography className={classes.paper}>Estimated hours</Typography> 
+            <Grid item xs ={12} md={3}>
+						<Typography className={classes.paper}>Estimated hours ({act['est_hours']}) </Typography> 
 							<TextField
 								variant="outlined"
 								required	
@@ -262,32 +277,34 @@ if (image){
 								name="est_hours"
 								type= 'number'
                 defaultValue = {act['est_hours']}
-                
+                inputProps =  {{min:0}}
 								onChange={handleChange}
 							/>
                         </Grid>
                         
             <Grid item xs={12}>Volunteer info</Grid>
-            <Grid item xs={6} md={3} style={{}}>
-            <Typography> Minimum Child volunteers  </Typography>
+            <Grid item xs={6} md={4} style={{}}>
+            <Typography> Minimum Child volunteers ( {act['vol_req']} ) </Typography>
             <TextField
             name='vol_req'
             type='number'
             defaultValue = {act['vol_req']}
             variant= 'outlined'
             onChange={handleChange}
+            inputProps =  {{min:0}}
                  
             >
             </TextField>
             </Grid>
-            <Grid item xs={6} md={3}>
-            <Typography> Minimum Parent volunteers  </Typography>
+            <Grid item xs={6} md={4}>
+            <Typography> Minimum Parent volunteers ( {act['mother_vol']} ) </Typography>
             <TextField
             name='mother_vol'
             type='number'
             defaultValue = {act['mother_vol'] ? act['mother_vol'] : ''}
             variant= 'outlined'
-            onChange={handleChange}        
+            onChange={handleChange}  
+            inputProps =  {{min:0}}      
             >
             </TextField>
             </Grid>
@@ -300,6 +317,15 @@ if (image){
             <Typography>Upload a cover Image!</Typography>
             <input 
                 type="file" id="image" accept="image/png, image/jpeg, image/jpg" multiple
+                onChange={handleImageChange}
+               
+            />
+            </Grid>
+         
+            <Grid item xs={12}>
+            <Typography>Upload Time Tracker</Typography>
+            <input 
+                type="file" id="image" accept="xlsx xlsm" multiple
                 onChange={handleImageChange}
                
             />

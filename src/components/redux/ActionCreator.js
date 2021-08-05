@@ -16,6 +16,26 @@ export const fetchUser = (token,userID) => {
               console.log(data)
               dispatch({ type: ActionTypes.GET_USER, payload: data })
               
+              
+            } )
+	}
+}
+
+export const fetchGuest = (token,userID) => {
+	return function (dispatch) {
+        fetch(`https://socialcredsbnd.herokuapp.com/api/user/profile/${userID}`,{
+            method: 'GET',
+            headers: {
+              "Content-Type": 'application/json',
+              "Authorization" : `Token ${token}`								
+            }
+          })
+            .then(res => res.json())
+            .then(data => {
+              console.log(data)
+              dispatch({ type: ActionTypes.GET_GUEST, payload: data })
+              
+              
             } )
 	}
 }
@@ -149,8 +169,9 @@ export const loginUser = (body) =>{
 						localStorage.setItem('token' , token)
 						localStorage.setItem('userID', id)
 						localStorage.setItem('first_name', fn)
+           
 						dispatch({ type: ActionTypes.LOGIN_USER, payload: data })
-            window.location.href = '/dashboard'
+            window.location.href = '/'
 						} else {
 							toast.warning('Incorrect username or password')
 						}

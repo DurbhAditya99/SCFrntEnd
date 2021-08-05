@@ -5,6 +5,7 @@ import { Card } from "@material-ui/core";
 import { FormControlLabel } from "@material-ui/core";
 import { Checkbox } from "@material-ui/core";
 import React from "react";
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 export default function DonatePage(props){
     const [state, setState] = React.useState(false)
@@ -20,7 +21,7 @@ export default function DonatePage(props){
     }
 
     return(
-        <Grid container xs={12} spacing={1} style={{textAlign:'center', marginTop: 120, zIndex:20, backgroundColor:''}}>
+        <Grid container xs={12} spacing={1} style={{textAlign:'center', marginTop: 100, zIndex:20, backgroundColor:''}}>
           
       
             <Grid item xs ={12}>
@@ -58,18 +59,24 @@ export default function DonatePage(props){
             inputProps ={{min: 0, step: 500}}>
             
             </TextField>
-            <Typography> Program you are donating for    </Typography>
-        <TextField
-            type='text  '
-            name="size"
-            variant= 'outlined'
-            value =  {title ? title : 'General Donation'}
-            >
-            
-            </TextField>
             </Grid>
-           
+          
+            <Grid item xs={12}></Grid>
+            <Grid item xs={12}>
+            <Typography> Program you are donating for    </Typography>
+            </Grid>
+            <Grid item md={4}></Grid>
+            <Grid item xs={12} md={4}>
+            <Autocomplete
+      id="combo-box-demo"
+      options={ [ {title:'General Donation'}, { title:'Internship'}  ] }
+      getOptionLabel={(option) => option.title}
       
+      renderInput={(params) => <TextField {...params}  label="Enter Program title" variant="outlined" value='Internship'  />}
+    />
+</Grid>
+        
+
             
         
      
@@ -77,13 +84,13 @@ export default function DonatePage(props){
             <Typography style={{fontSize: 20, fontFamily: 'Raleway'}}>Please read the terms and conditions attached below!</Typography>
         </Grid>
       <Grid item xs={12}>
-      <a href='https://drive.google.com/file/d/1tlqy-e1LNcCIEORd-E0xFAeK_HzoWZLL/view?usp=sharing'>Terms and conditions</a>
+      <a href='https://drive.google.com/file/d/1tlqy-e1LNcCIEORd-E0xFAeK_HzoWZLL/view?usp=sharing' target='_blank' rel='noopener noreferrer'> Terms and conditions</a>
        </Grid>
        <Grid item xs={12}>
-       <a href='https://drive.google.com/file/d/10bdl0PbZbmSakvYJzm4Eh6yGMauPE17V/view?usp=sharing'>Fees and Refund Policy</a>
+       <a href='https://drive.google.com/file/d/18dAOpUYSc70o0ws22OYHRrvRMA24V1vy/view?usp=sharing' target='_blank' rel='noopener noreferrer'>Fees and Refund Policy</a>
        </Grid>
        <Grid item xs ={12}>
-       <a href='https://drive.google.com/file/d/1N3p9Wr2ksD61Cm1r9vjR0JCKGLRaLGSQ/view?usp=sharing'>Privacy Policy</a>
+       <a href='https://drive.google.com/file/d/1N3p9Wr2ksD61Cm1r9vjR0JCKGLRaLGSQ/view?usp=sharing' target='_blank' rel='noopener noreferrer'>Privacy Policy</a>
        </Grid>
        <Grid item xs={12}></Grid>
        <Grid item md={2}></Grid>
@@ -98,7 +105,7 @@ export default function DonatePage(props){
       style={{fontFamily:'Raleway'}}
      />
    }
-   label="By clicking proceed, you agree to our terms of use, fees and refund policy and that you have read and accept the privacy policy"
+   label="By clicking proceed, you agree to our terms of use, fees and refund policy and that you have read and accepted the privacy policy"
  />
        </Grid>
        <Grid item xs={12}>

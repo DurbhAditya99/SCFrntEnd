@@ -14,13 +14,14 @@ import {
 
 
 const tokenglobal = localStorage.getItem('token')
+const pic = localStorage.getItem('pic')
 
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
   },
     header: {
-      backgroundColor: "#F26627",
+      backgroundColor: "#ff8800",
       height: 80
     },
     logo: {
@@ -38,10 +39,12 @@ const useStyles = makeStyles(() => ({
     menuButton: {
         fontFamily: "Open Sans, sans-serif",
         fontWeight: 800,
-        fontSize: 15,
+        fontSize: 20,
         marginTop: 24,
         color: '#ffffff',
-       
+        width: 100,
+        textTransform:'none',
+        borderRadius: 20
         
      },
      menuButtonM: {
@@ -49,8 +52,9 @@ const useStyles = makeStyles(() => ({
       fontWeight: 800,
       fontSize: 5,
       marginTop: 24,
-      width: 50,
-      color: '#ffffff'
+      width: 100,
+      color: '#ffffff',
+      textTransform:'none',
    },
   }));
 
@@ -61,7 +65,7 @@ const useStyles = makeStyles(() => ({
     window.location.href = '/';
   }
 
-  const pict = '/' + localStorage.getItem('pic')
+  
 
 function Navbar(){
       
@@ -71,10 +75,11 @@ function Navbar(){
       drawerOpen: false
     });
     const { mobileView,drawerOpen  } = state;
-    const [color,setColor] = useState('#F9A26C')
+    const [col,setColor] = useState('')
     const user = useSelector((state) => state.users.users)
 
     useEffect(() => {
+      
       const setResponsiveness = () => {
         return window.innerWidth < 900
           ? setState((prevState) => ({ ...prevState, mobileView: true }))
@@ -94,10 +99,7 @@ function Navbar(){
     const displayDesktop = () => {
 
         return (
-          
-            
-
-
+  
              localStorage.getItem('token') ? 
              
         
@@ -105,39 +107,44 @@ function Navbar(){
             <Grid
               
               container 
-              spacing={6}
+              spacing={3}
               >
                 <Grid item md={0.5}></Grid>
             <Grid item xs={0.5}  style={{marginTop:14}}> <img src = '/gotlogo.jpeg' style={{height: 52, width: 52,  borderRadius: 50}}></img></Grid>
           
-            <Grid item  xs={1} md={6} >
+            <Grid item  xs={1} md={7} >
             <Typography type="title" color="inherit" style={{marginTop: 10}}>
             {GOTLogo}
             </Typography>
             </Grid> 
-  
+            
            <Grid item xs={1}>
-            <Button className={menuButton} style={{borderRadius: 20}}  href='/create' ><Typography style={{fontFamily: 'Raleway'}}>Create </Typography> </Button> 
+            <Button className={menuButton}   href='/create' ><Typography style={{fontFamily: 'Raleway'}}>Create </Typography> </Button> 
             </Grid>
             
              <Grid item xs={1}>
-            <Button className={menuButton} style={{borderRadius: 20}}  href='/dashboard' ><Typography style={{fontFamily: 'Raleway'}}> Dashboard </Typography> </Button>
+            <Button className={menuButton}   href='/' ><Typography style={{fontFamily: 'Raleway'}}> Dashboard </Typography> </Button>
             </Grid>
-            <Grid item xs={1} style={{textAlign : 'center'}}>
-           <div class='dropdown' >
-            <Button style={{  marginTop: 18}} href='/profile'>
-              <Typography style={{color: '#ffffff',  fontSize:16,fontFamily: 'Raleway', zIndex:30}}> My Profile </Typography>  &nbsp;
-              <img src={user['profile_pic']} style={{height: 40, width:40, borderRadius: 100 }}></img>
+            <Grid item xs={1}>
+           <div class='dropdown' style={{textAlign : 'center'}}>
+            <Button className={menuButton} style={{borderRadius: 40,width:120, marginTop:20,textTransform:'none',borderColor:'#f26627' }} href='/profile'>
+            <img src={user['profile_pic']} style={{height: 35, width:35, borderRadius: 100 }}></img> 
+            &nbsp;&nbsp;
+              <Typography style={{color: '#ffffff',  fontSize:16,fontFamily: 'Raleway', zIndex:30}}> {user['first_name']} </Typography>  &nbsp;
+              
               </Button>
-               <div class="dropdown-content">
+               <div class="dropdown-content" style={{textAlign : 'center'}}> 
                <a href='/profile'>View Profile</a>
+               <a href='/inbox'>Notifications</a>
                <a onClick={logout} href="/">Logout</a>
                </div> 
             </div>
+           
             </Grid>
-            
-            <Grid item md={1}>
-             <Button className={menuButtonM} style={{borderRadius: 20, backgroundColor:'#F9A26C', width:120, height:40}} href='/donate' ><Typography style={{fontFamily: 'Raleway'}}>Donate</Typography> </Button>
+           
+       &nbsp; &nbsp;
+            <Grid item xs={1}>
+             <Button className={menuButton} style={{borderRadius: 20, backgroundColor:'#f26627', width:120, height:40}} href='/donate' ><Typography style={{fontFamily: 'Raleway'}}>Donate</Typography> </Button>
              </Grid>
             </Grid>
             </Toolbar>
@@ -165,7 +172,7 @@ function Navbar(){
              </Grid> 
              
               <Grid item md={1}>
-             <Button className={menuButtonM} style={{borderRadius: 20}}  href='http://www.giftoftime.in/index.html' ><Typography style={{fontFamily: 'Raleway'}}> About </Typography> </Button>
+             <Button className={menuButtonM} style={{borderRadius: 20}}  href='/about' ><Typography style={{fontFamily: 'Raleway'}}> About </Typography> </Button>
              </Grid>
             
              <Grid item md={1}>
@@ -184,8 +191,9 @@ function Navbar(){
 
       const displayMobile=() =>{
 
-      const handleDrawerOpen = () =>
-      setState((prevState) => ({ ...prevState, drawerOpen: true }));
+      const handleDrawerOpen = () =>{
+      setColor('#F9A26C')
+      setState((prevState) => ({ ...prevState, drawerOpen: true })); }
       const handleDrawerClose = () =>
       setState((prevState) => ({ ...prevState, drawerOpen: false }));
 
@@ -196,7 +204,8 @@ function Navbar(){
           <Toolbar> 
        <IconButton   {...{
             edge: "start",
-            color: 'inherit',
+            color: 'white',
+            backgroundColor: 'white',
             "aria-label": "menu",
             "aria-haspopup": "true",
             onClick: handleDrawerOpen,
@@ -229,7 +238,10 @@ function Navbar(){
         <Button href='/create' ><Typography style={{fontFamily: 'Raleway'}}>Create</Typography> </Button> 
         </Grid>
         <Grid item xs={12}>
-        <Button href='/dashboard' ><Typography style={{fontFamily: 'Raleway'}}> Dashboard </Typography> </Button> 
+        <Button href='/' ><Typography style={{fontFamily: 'Raleway'}}> Dashboard </Typography> </Button> 
+        </Grid>
+        <Grid item xs={12}>
+        <Button href='/inbox'  ><Typography style={{fontFamily: 'Raleway'}}>Notifications</Typography> </Button> 
         </Grid>
         <Grid item xs={12}>
         <Button href='/profile' ><Typography style={{fontFamily: 'Raleway'}}>View Profile </Typography> </Button>
@@ -259,15 +271,17 @@ function Navbar(){
        <IconButton   {...{
             edge: "start",
             color: "inherit",
+            backgroundColor: 'white',
             "aria-label": "menu",
             "aria-haspopup": "true",
             onClick: handleDrawerOpen,
+            zIndex:100
           }}>
           <MenuIcon />
         </IconButton>
 
        <Drawer
-          fullWidth
+          
           {...{
             anchor: "left",
             open: drawerOpen,
@@ -288,7 +302,7 @@ function Navbar(){
         <Button href='/' ><Typography style={{fontFamily: 'Raleway'}}>Home </Typography> </Button> 
         </Grid>
         <Grid item xs={12}>
-        <Button href='/' ><Typography style={{fontFamily: 'Raleway'}}>About </Typography> </Button> 
+        <Button href='/about' ><Typography style={{fontFamily: 'Raleway'}}>About </Typography> </Button> 
         </Grid>
         <Grid item xs={12}>
         <Button href='/login' ><Typography style={{fontFamily: 'Raleway'}}>Login </Typography> </Button>

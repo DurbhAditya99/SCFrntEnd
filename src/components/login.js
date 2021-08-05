@@ -14,7 +14,10 @@ import { useDispatch } from 'react-redux';
 import { loginUser } from './redux/ActionCreator';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Input from "@material-ui/core/Input";
+import InputAdornment from "@material-ui/core/InputAdornment";
 import Particles from 'react-particles-js';
+import { InputLabel } from '@material-ui/core';
 toast.configure()
 
 const useStyles = makeStyles((theme) => ({
@@ -52,6 +55,12 @@ function LoginPage(){
 
     const history = useHistory();
 	const dispatch = useDispatch()
+	const [passwordShown, setPasswordShown] = useState(false);
+	const togglePassword = () => {
+		// When the handler is invoked
+		// inverse the boolean state of passwordShown
+		setPasswordShown(!passwordShown);
+	  };
     const initialFormData = Object.freeze({
       email_id: '',
       password: '',
@@ -102,12 +111,13 @@ function LoginPage(){
 				{errors.length >0 ?<Alert severity='error'> {errors}</Alert>  : null }
 				<form className={classes.form} noValidate>
 					<Grid container spacing={3} style={{zIndex:5}}>
-						<Grid item xs={12} style={{textAlign: 'center'}}>
-							<TextField
+						<Grid item xs={12} style={{marginLeft:20, marginRight:20}}>
+						<InputLabel style={{textAlign:'left'}}>Email ID</InputLabel>
+							<Input
 								variant="outlined"
 								required
-								
-								style={{height: 40, width: 300}}
+								fullWidth
+								style={{height: 40}}
 								id="email_id"
 								label="Email Address"
 								name="email_id"
@@ -115,27 +125,40 @@ function LoginPage(){
 								onChange={handleChange}
 							/>
 						</Grid>
-						<Grid item xs={12} style={{textAlign: 'center'}}>
-							<TextField
-								variant="outlined"
-								required
+						
+						
+						<Grid item xs={12} style={{display:'inline-block',marginLeft:20, marginRight:20}}>
+						<InputLabel style={{textAlign:'left'}}>Password</InputLabel>
+								<Input
 								
-								style={{height: 40, width:300}}
+								required
+								fullWidth
+								style={{height: 40}}
 								name="password"
 								label="Password"
-								type="password"
+								type={passwordShown ?  "text" : "password" }
 								id="password"
 								autoComplete="current-password"
 								onChange={handleChange}
+								endAdornment={
+									<InputAdornment position="end">
+							<Button onClick={togglePassword}><span class="material-icons">
+									visibility
+										</span></Button>
+									</InputAdornment>
+								}
 							/>
+								
+						
+							
+							
 						</Grid>
+						<br></br>
 						<Grid item xs={12} style={{textAlign: 'center'}}>
 					<Button
 						type="submit"
-						
-						style={{height: 40, marginTop: 16}}
 						variant="contained"
-						color="primary"
+						style={{backgroundColor:"#ff8800", color:'white',height: 40, marginTop: 16}}
 						onClick={handleSubmit}
 					>
 						Sign In
@@ -156,7 +179,7 @@ function LoginPage(){
 						type="submit"
 						fullWidth
 						style={{height: 23, width: 233, marginTop: 48, fontSize: 11}}
-						color="primary"
+						color="#ff8800"
 						href= '/signup'
 					>
 						Don't have an account? Sign up

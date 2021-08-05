@@ -25,9 +25,9 @@ function Footer(){
       
     }}> 
   
-  <a style ={{ marginTop: 40, color:'white',}} href='https://drive.google.com/file/d/1tlqy-e1LNcCIEORd-E0xFAeK_HzoWZLL/view?usp=sharing'>Terms and conditions</a>
-  <a style ={{color:'white'}} href='https://drive.google.com/file/d/1N3p9Wr2ksD61Cm1r9vjR0JCKGLRaLGSQ/view?usp=sharing'>Privacy Policy</a>
-  <a style ={{color:'white'}} href='https://drive.google.com/file/d/10bdl0PbZbmSakvYJzm4Eh6yGMauPE17V/view?usp=sharing'>Fees and Refund Policy</a>
+  <a style ={{ marginTop: 40, color:'white',}} href='https://drive.google.com/file/d/1tlqy-e1LNcCIEORd-E0xFAeK_HzoWZLL/view?usp=sharing' target='_blank' rel='noopener noreferrer'>Terms and conditions</a>
+  <a style ={{color:'white'}} href='https://drive.google.com/file/d/1N3p9Wr2ksD61Cm1r9vjR0JCKGLRaLGSQ/view?usp=sharing' target='_blank' rel='noopener noreferrer'>Privacy Policy</a>
+  <a style ={{color:'white'}} href='https://drive.google.com/file/d/18dAOpUYSc70o0ws22OYHRrvRMA24V1vy/view?usp=sharing' target='_blank' rel='noopener noreferrer'>Fees and Refund Policy</a>
   <h5>All rights reserved.</h5>
   </AppBar>
     

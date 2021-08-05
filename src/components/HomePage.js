@@ -19,17 +19,21 @@ import ProfileViewPage from './profileview'
 import Email from './email'
 import Programs from './programs'
 import THNKPage from '../thankyou'
+import Inbox from './inbox'
+import About from './about'
+import Button from '@material-ui/core/Button';
 function HomePage(){
 
     return(
-    
        
+      
+        
         <Router>
     
         <Switch>
-        
-            <Route exact path = '/' component={LandingPage} />
-
+            {localStorage.getItem('token') ? 
+             <Route exact path = '/' component={Dashboard} /> :<Route exact path = '/' component={LandingPage} /> 
+    }
             <div style={{
             marginTop: 80
         }}>
@@ -46,14 +50,17 @@ function HomePage(){
             <Route path = '/actdetail/:id' render={(props) => <ActDetail {...props} /> } />
             <Route path = '/actedit/:id' render={(props) => <ActEdit {...props} /> } />
             <Route path = '/activate/:uidb64/:token/' render={(props)=><Message {...props} /> } />
-            <Route path = '/dashboard' component={Dashboard} />
+            
             <Route path = '/actsignup' component={ActivitySignUp} />
             <Route path = '/donate' component={DonatePage}></Route>
             <Route path = '/signup/donate' component={DonateSignPage}></Route>
             <Route path = '/info' component = {AccountInfo}></Route>
+            <Route path = '/inbox' component = {Inbox}></Route>
+            <Route path = '/about' component = {About}></Route>
+            
             </div>
             </Switch>
-           
+            
          </Router>
          
     )

@@ -7,6 +7,7 @@
 @import url('https://fonts.googleapis.com/css?family=Luckiest+Guy');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Work+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/css?family=MonteCarlo');
 @import url('https://fonts.google.com/icons?selected=Material%20Icons%3Alocation_on');
 
 
@@ -233,11 +234,11 @@ html,body{
     background-image:
     linear-gradient( to right , rgba(255, 255, 255, 1),rgba(255, 255, 255, 0.2), rgba(255, 1, 0, 0), rgba(255, 0, 0, 0)),
     url('images/cover.jpeg');
-    width: 1003px;
+    width: 1403px;
     height: 688px;
     background-size: cover;
     float: right;
-
+   
 }
 
 #grad1{
@@ -265,9 +266,11 @@ html,body{
 }
 .dropdown-content {
     display: none;
-    position: absolute;
+    position:fixed;
     background-color: #f1f1f1;
-    min-width: 160px;
+    text-align: left;
+    min-width: 120px;
+    font-size: 14px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
   }
@@ -329,4 +332,99 @@ html,body{
 .myDIV{
     
     font-size: 20px
+}
+.fixedbutton {
+    position: fixed;
+    bottom: 560px;
+    right: 1000px; 
+}
+.buttonwrapper {
+    display: inline-block;
+  }
+  
+  input{
+    background-color: transparent;
+    border: 2px solid black;
+  }
+  
+  button {
+    z-index: 10;
+    border: none;
+    background-color: transparent;
+  }
+
+  .frame{
+    width: 210px;
+    height: 0px;
+    margin: 0 auto;
+    margin-top: 20px;
+    position: relative;
+    cursor: pointer;
+    border-radius: 12px;
+    z-index: 30px;
+    box-shadow: 10px 10px 5px grey;
+  }
+  
+  .frame:hover .hex-inner{
+    height: 100px;
+    top: 90px !important;
+    border-radius: 4px;
+  }
+  
+  .frame:hover .label{
+    transform: scale(.90);
+    -webkit-transform: scale(.90);
+  }
+  
+  .hex-outer{
+    background: #ff8800 ;
+    width: 210px;
+    height: 120px;
+    border-radius: 2px;
+  }
+  
+  .hex-inner{
+    background: #ff8800 ;
+    width: 200px;
+    height: 115px;
+    position: relative;
+    left: 5px;
+    top: 82px !important;
+    border-radius: 12px;
+    transition: all .4s;
+    -webkit-transition: all .4s;
+  }
+  
+  .h1{
+    position: absolute;
+    top: 80px;
+  }
+  
+  .h2{
+    position: absolute;
+    top: 80px;
+    transform: rotate(60deg);
+    -webkit-transform: rotate(60deg);
+  }
+  
+  .h3{
+    position: absolute;
+    top: 80px;
+    transform: rotate(-60deg);
+    -webkit-transform: rotate(-60deg);
+  }
+  
+.label{
+  position: absolute;
+  color: #ffffff;
+  font-weight: bold;
+ 
+
+  font-size: 26px;
+  text-align: center;
+  font-family: Raleway;
+  vertical-align:inherit;
+  margin-top: 100px;
+  transition: all .4s;
+  -webkit-transition: all .4s;
 }

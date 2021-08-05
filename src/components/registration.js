@@ -301,7 +301,7 @@ export default function SignUp() {
 						<Grid item xs={1} md={3}></Grid>
 						<Grid item xs={1} md={3}></Grid>	
 						<Grid item xs={10} md={6}>
-					    <Typography style={{marginTop:8,marginBottom:8, fontFamily:'Raleway'}}>If below 18 please provide parents' email id and mobile number</Typography>	
+					    <Typography style={{marginTop:8,marginBottom:8, fontFamily:'Raleway'}}>If you're below 18, please provide your parent's email id and mobile number</Typography>	
 						</Grid>	
 						<Grid item xs={1} md={3}></Grid>	
 						<Grid item md={3}></Grid>
@@ -325,8 +325,9 @@ export default function SignUp() {
 								
 								name="mobile_number"
 								label= "Mobile Number(+91): "
-								type="number"
+								type="tel"
 								id="MobileNo"
+							
 								onChange={handleChange}
 							/>
 								{formErrors.mobile_number.length>0 && (
@@ -381,17 +382,17 @@ export default function SignUp() {
 						</Grid>
 						<Grid item xs={3}></Grid>
 						<Grid item xs={2}></Grid>
-						<Grid item xs={8} style={{textAlign: 'center', fontSize:16}}>	
+						<Grid item xs={12} md={8} style={{textAlign: 'center', fontSize:16}}>	
 						<FormControlLabel
-       					 control={<Checkbox checked={state.checkedB} onChange={handleChange} name="checkedB" />}
+       					 control={<Checkbox checked={state.checkedB} onChange={handleChange} name="checkedB" style={{color:'#ff8800'}} />}
        					
-						 style={{ marginTop: 8}}
-    					  />I agree to the <a href='https://drive.google.com/file/d/1tlqy-e1LNcCIEORd-E0xFAeK_HzoWZLL/view?usp=sharing'>Terms and Conditions</a> and <a href='https://drive.google.com/file/d/1N3p9Wr2ksD61Cm1r9vjR0JCKGLRaLGSQ/view?usp=sharing'>Privacy Policy</a>	
+						 style={{ marginTop: 8,color: '#ff8800'}}
+    					  />I agree to the <a href='https://drive.google.com/file/d/1tlqy-e1LNcCIEORd-E0xFAeK_HzoWZLL/view?usp=sharing' target='_blank' rel='noopener noreferrer'>Terms and Conditions</a> and <a href='https://drive.google.com/file/d/1N3p9Wr2ksD61Cm1r9vjR0JCKGLRaLGSQ/view?usp=sharing' target='_blank' rel='noopener noreferrer'>Privacy Policy</a>	
 						</Grid>
 						<Grid item xs={2}></Grid>
 					
 					<Grid xs={3} md={4}></Grid>
-					<Grid item xs={6} md={4} style={{textAlign: 'center'}}>
+					<Grid item xs={12} md={4} style={{textAlign: 'center'}}>
 					{ state.checkedB ? 
 					<Button
 						type="submit"
@@ -399,7 +400,7 @@ export default function SignUp() {
 						color="primary"
 						className={classes.submit}
 						onClick={handleSubmit}
-						style ={{ height:40 }}
+						style ={{ height:40,backgroundColor:'#ff8800',color:'#ffffff' }}
 					>
 						Sign Up
 					</Button> : 	
@@ -407,7 +408,7 @@ export default function SignUp() {
 						type="submit"
 						disabled
 						variant="contained"
-						color="primary"
+						
 						className={classes.submit}
 						onClick={handleSubmit}
 						style ={{ height:40 }}

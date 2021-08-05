@@ -77,7 +77,7 @@ function ProfilePage(){
 
   
   return(
-            <Grid container spacing={1} style={{backgroundColor:'#ffffff',zIndex: 10, borderRadius:30 , marginTop: 80,fontSize: 20,fontFamily:'Raleway'}}> 
+            <Grid container spacing={1} style={{backgroundColor:'#ffffff',zIndex: 10, borderRadius:30 ,fontSize: 20,fontFamily:'Raleway'}}> 
                  <Grid item md={1}></Grid>
                 <Grid item md={10 }>               
                 
@@ -124,9 +124,7 @@ function ProfilePage(){
         </Grid>
         <Grid item xs={12} md={4}>
           <Grid container spacing={1} style={{height: 144,fontFamily:'Raleway', fontSize: 20,textAlign:'left'}}>
-          <Grid item xs={12}></Grid>
-          <Grid item xs={12}></Grid>
-          <Grid item xs={12}></Grid>  
+          
             <Grid item md={1}></Grid>
              <Grid container md={12} style={{textAlign:'center'}} spacing={1}>                                                   
             <Grid item xs={12} style={{fontSize: 24}}>
@@ -139,22 +137,18 @@ function ProfilePage(){
             User ID: #{user['id']}
             
             </Grid>
-            <Grid item  xs={12}>
-            
-            Joining date: {user['created_at'] ?Moment(user['created_at']).format('d MMM YYYY'): ''}
-            
-            </Grid>
-            <Grid item  xs={12}>
-            <i class="material-icons">location_on</i>
-           Bangalore
-            
-            </Grid>
+           
+            <Grid item xs={12}>
+        <i   class="material-icons">email</i>{user['email_id']}
+        </Grid>
+        <Grid item xs={12}>
+        <Typography> <i class="material-icons">smartphone</i>  {user['mobile_number']}</Typography>
+        </Grid>
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={12}></Grid>
-        <Grid item xs={12}></Grid>
-        <Grid item xs={12}></Grid>
+      
         <Grid item xs={12}></Grid>
         <Grid item xs={1} md={1}></Grid>
         <Grid container spacing={1} xs={12} md={12} style={{outlineStyle:'solid' ,textAlign:'center',backgroundColor: '#ffffff',borderRadius:20, fontSize: 40}}>
@@ -188,14 +182,7 @@ function ProfilePage(){
         <Grid item xs={12}></Grid>
         <br></br>
         <Grid item xs={1} md={1}></Grid>
-        <Grid item xs={11}>
-        <i class="material-icons">email</i>{user['email_id']}
-        </Grid>
-        <Grid item xs={12}></Grid>
-        <Grid item xs={1} md={1}></Grid>
-        <Grid item xs={11}>
-        <i class="material-icons">smartphone</i>  {user['mobile_number']}
-        </Grid>
+       
         <Grid item xs={12}></Grid>
             </Grid>
             <Grid item xs={12}></Grid>
@@ -204,6 +191,7 @@ function ProfilePage(){
 
             </Card>
             </Grid>
+            
                                                       
           </Grid>
           
